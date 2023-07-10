@@ -63,4 +63,51 @@
 
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/b964ffac-5cbd-421e-a1eb-0470a6a97570)
 
-### 
+### 클라우드 컴퓨팅의 5가지 특징
+- **On-demand self service: 완전한 온디맨드이며 셀프서비스**
+  - 사용자는 리소스를 프로비저닝 할 수 있고 AWS의 개입없이 사용할 수 있음
+- **Broad network access: 광역 네트워크에 접근할 수 있음**
+  - 네트워크를 통해 리소스를 사용할 수 있고 다양한 방법으로 접근가능
+- **Multi-tenancy and resource pooling: 멀티 테넌시가 되며 리소스 풀링이 가능**
+  - 자신뿐만 아니라 AWS의 다른 고객도 동일한 인프라와 애플리케이션을 공유하면서도 보안과 프라이버시를 유지할 수 있음
+  - 많은 고객은 동일한 물리적 리소스로 서비스를 받게 됨 -> 모든 사용자들이 클라우드의 전체 데이터 센터를 공유하는 것과 같음
+  - 멀티 테넌시 : 단일 소프트웨어 인스턴스로 서로 다른 여러 사용자 그룹에 서비스를 제공할 수 있는 소프트웨어 아키텍처, SaaS가 멀티테넌트 아키텍처의 예시
+  - 리소스 풀링 : 서버나 스토리지 등의 자원을 미리 확보하고 이를 사용자 요청에 따라 제공한다는 개념 혹은 이를 확보해놓은 가상적인 공간
+- **Rapid elasticity and scalability: 빠른 탄력성과 확장성 제공**
+  - 필요할 때 자동으로 신속하게 원하는 리소스를 획득하고 처리할 수 있음
+  - 온디맨드 기반으로 쉽고 빠르게 확장할 수 있음
+- **Measured service: 측정 가능한 서비스**
+  - 사용량을 측정해서 정확히 사용한 만큼 지불하는 것 -> 온프레미스에서 가장 크게 바뀐 점!
+
+### 클라우드 컴퓨팅의 6가지 장점
+- **Trade CAPEX to OPEX: 자본적 지출을 업무 지출로 교환할 수 있음**
+  - 하드웨어를 소유하지 않고 온디맨드로 지불하는 것 -> 하드웨어를 구매하지않고 AWS에서 임대
+  - 총 소유 비용인 TCO와 업무 지출(OPEX)을 절감할 수 있음
+- **Benefit from massive economies of scale: 거대한 규모의 경제로부터 혜택을 얻을 수 있음**
+  - 시간이 지남에 따라 AWS 가격이 인하됨 -> AWS는 규모가 크기 때문에 실행하는데 효과적
+- **Stop guessing capacity: 용량을 짐작할 필요가 없음**
+  - 애플리케이션의 실제 측정된 사용량을 기반으로 자동 확장 가능
+- **Increase speed and agility: 속도와 민첩성향상(온디맨드)**
+- **Stop spending money running and maintaining data centers: 데이터 센터의 운영 및 관리하는 막대한 비용을 지불하지 않아도 됨**
+- **Go global in minutes: leverage the AWS global infrastructure**
+
+### 클라우드를 사용해 해결할 수 있는 문제
+- Flexibility: change resource types when needed
+- Cost-Effectiveness: pay as you go, for what you use
+- Scalability: accommodate larger loads by making hardware stronger or adding additional nodes
+- Elasticity: ability to scale out and scale-in when needed
+- High-availability and fault-tolerance: build across data centers
+- Agility: rapidly develop, test and launch software applications
+
+## 다양한 유형의 클라우드 컴퓨팅
+- IaaS(Infrastructure as a Service)
+  - 클라우드 IT에 관한 구성 요소 제공: 네트워킹, 컴퓨터 또는 데이터 스토리지 공간을 원시형태로 제공
+  - 높은 유연성
+  - 기존 온프레미스와 쉬운 병렬
+- PaaS(Platform as a Service
+  - 기본 인프라를 관리할 필요가 없음
+  - 배포와 애플리케이션 관리만 집중할 수 있음
+- SaaS(Software as a Service)
+  - 서비스 제공업체가 완전히 운영하고 관리
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/7c859636-7d59-4c19-a2ca-427a61ba2c41)
