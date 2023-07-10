@@ -2,6 +2,7 @@
 
 1. [기존 IT 개요](#1-기존-IT-개요)
 2. [클라우드 컴퓨팅이란](#2-클라우드-컴퓨팅이란)
+3. [다양한 유형의 클라우드 컴퓨팅](#3-다양한-유형의-클라우드-컴퓨팅)
 
 ---
 
@@ -99,7 +100,9 @@
 - High-availability and fault-tolerance: build across data centers
 - Agility: rapidly develop, test and launch software applications
 
-## 다양한 유형의 클라우드 컴퓨팅
+---
+
+## 3. 다양한 유형의 클라우드 컴퓨팅
 - IaaS(Infrastructure as a Service)
   - 클라우드 IT에 관한 구성 요소 제공: 네트워킹, 컴퓨터 또는 데이터 스토리지 공간을 원시형태로 제공
   - 높은 유연성
@@ -111,3 +114,28 @@
   - 서비스 제공업체가 완전히 운영하고 관리
 
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/7c859636-7d59-4c19-a2ca-427a61ba2c41)
+
+### 클라우드 컴퓨팅 타입 예시
+- Infrastructure as a Service:
+  - Amazon EC2 (on AWS)
+  - GCP, Azure, Rackspace, Digital Ocean, Linode
+- Platform as a Service:
+  - Elastic Beanstalk (on AWS)
+  - Heroku, Google App Engine (GCP), Windows Azure (Microsoft)
+- Software as a Service:
+  - Many AWS services (ex: Rekognition for Machine Learning)
+  - Google Apps (Gmail), Dropbox, Zoom
+
+### 클라우드 가격책정 요약
+- AWS는 3가지의 기본 가격이 있음(종량 과금제)
+- Compute: 컴퓨팅 시간에 따라 지불
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/335ec4c9-2b74-431a-b6e6-10a80cf878af)
+
+- Storage: 저장한 양만큼 지불
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/92c8f177-fb04-4233-aeee-13ed18896cfa)
+
+- Data transfer OUT of the Cloud(클라우드에 들어오는 모든 데이터는 무료)
+  
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/20fcfb28-5d6a-4592-9218-bff1c730f744)
