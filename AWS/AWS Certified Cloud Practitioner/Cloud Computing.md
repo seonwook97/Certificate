@@ -54,3 +54,13 @@
 - 모든 리소스에 바로 접근할 수 있음
 - 인터페이스가 단순하여 서버, 스토리지, 데이터베이스, 애플리케이션 서비스에 쉽게 접근할 수 있음
 - 특정 AWS는 웹 애플리케이션을 통해 필요한 것을 프로비저닝하고 사용하는 동안 이런 애플리케이션 서비스를 위한 네트워크로 연결된 하드웨어를 소유하며 유지하고 있음
+
+### 클라우드 서비스
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/0e3e7f2d-470d-46f3-90bd-cf2dfb46b74a)
+
+### 클라우드 서비스의 전개
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/b964ffac-5cbd-421e-a1eb-0470a6a97570)
+
+### 
