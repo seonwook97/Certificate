@@ -5,6 +5,7 @@
 3. [다양한 유형의 클라우드 컴퓨팅](#3-다양한-유형의-클라우드-컴퓨팅)
 4. [AWS 클라우드 개요](#4-AWS-클라우드-개요)
 5. [AWS의 콘솔 및 서비스 둘러보기](#5-AWS의-콘솔-및-서비스-둘러보기)
+6. [공동 책임 모델 및 AWS 허용 정책](#6-공동-책임-모델-및-AWS-허용-정책)
 
 ---
 
@@ -184,6 +185,9 @@
 ### AWS Points of Presence (Edge Locations)
 - AWS는 42개국 84개의 도시에 200개가 넘는 전송 지점을 가지고 있음
 - 이런 점으로 인해 최소 지연 시간으로 최종 사용자에게 컨텐츠를 전달하는 데에 아주 유용
+- https://aws.amazon.com/cloudfront/features/
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/83552d2d-7237-4922-ba63-4dbebac8df05)
 
 ---
 
@@ -200,3 +204,8 @@
   - Elastic Beanstalk (Platform as a Service)
   - Lambda (Function as a Service)
   - Rekognition (Software as a Service)
+- 리전별 AWS 서비스: https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services
+
+---
+
+## 6. 공동 책임 모델 및 AWS 허용 정책
