@@ -52,3 +52,5 @@
     - 적용될 action의 리소스의 목록 -> 사진 예시로는 버킷 다른 것들도 가능
   - Condition: conditions for when this policy is in effect(optional)
     - Statement가 언제 적용될지 결정함 
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/e7c8fc54-a0a5-431b-b791-3f0cba93b05e)
