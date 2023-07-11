@@ -4,6 +4,7 @@
 2. [클라우드 컴퓨팅이란](#2-클라우드-컴퓨팅이란)
 3. [다양한 유형의 클라우드 컴퓨팅](#3-다양한-유형의-클라우드-컴퓨팅)
 4. [AWS 클라우드 개요](#4-AWS-클라우드-개요)
+5. [AWS의 콘솔 및 서비스 둘러보기](#5-AWS의-콘솔-및-서비스-둘러보기)
 
 ---
 
@@ -149,3 +150,53 @@
 
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/22d03af7-14e3-468a-ba1b-32f74e2b341a)
 
+### AWS Global Infrastructure
+- AWS Regions
+- AWS Availability Zones
+- AWS Data Centers
+- AWS Edge Locations / Points of Presence
+- https://infrastructure.aws/
+
+### AWS Regions
+- AWS has Regions all around the world
+- Names can be us-east-1, eu-west-3…
+- A region is a cluster of data centers
+- Most AWS services are region-scoped
+
+#### How to choose an AWS Region -> AWS 리전을 어떻게 선택하는지 출제 가능
+- **Compliance with data governance and legal requirements(법률준수)**: data never leaves a region without your explicit permission
+- **Proximity to customers(지연시간을 줄여야)**: reduced latency
+- **Available services within a Region(해당 리전에 해당서비스가 있는지)**: new services and new features aren’t available in every Region
+- **Pricing(리전마다 요금이 다름)**: pricing varies region to region and is transparent in the service pricing page
+
+### AWS Availability Zones
+- 가용영역은 리전 내 존재
+- 보통은 3개씩, 최소 2개 ~ 최대 6개
+- 시드니 리전: ap-southeast-2 -> 3개의 가용영역
+  - ap-southeast-2a
+  - ap-southeast-2b
+  - ap-southeast-2c
+- 각각의 가용 영역은 여분의 전원 네트워킹, 통신기능을 갖춘 하나 또는 두 개의 개별적인 데이터 센터로 구성
+  - southeast-2a 내에 두 개의 데이터센터, 2b에도 두 개, 2c에도 두 개가 있을 수 있음(1개, 3개, 4개도 가능 AWS가 공개하지 않아 정확히는 알 수 없음)
+- 각각의 가용 영역들이 재난 발생에 대비해 서로 분리되어 있음 -> 2a가 불이나도 2b, 2c에는 영향이 가지 않음
+- 가용 영역들은 높은 대역폭의 초저지연 네트워킹으로 서로 연결되어 리전을 형성
+
+### AWS Points of Presence (Edge Locations)
+- AWS는 42개국 84개의 도시에 200개가 넘는 전송 지점을 가지고 있음
+- 이런 점으로 인해 최소 지연 시간으로 최종 사용자에게 컨텐츠를 전달하는 데에 아주 유용
+
+---
+
+## 5. AWS의 콘솔 및 서비스 둘러보기
+
+### AWS Console
+- AWS Global Services
+  - Identity and Access Management (IAM)
+  - Route 53 (DNS service)
+  - CloudFront (Content Delivery Network)
+  - WAF (Web Application Firewall)
+- Most AWS services are Region-scoped:
+  - Amazon EC2 (Infrastructure as a Service)
+  - Elastic Beanstalk (Platform as a Service)
+  - Lambda (Function as a Service)
+  - Rekognition (Software as a Service)
