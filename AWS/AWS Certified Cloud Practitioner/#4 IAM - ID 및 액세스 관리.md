@@ -1,4 +1,4 @@
-![image](https://github.com/seonwook97/Certificate/assets/92377162/08ec5143-b1fa-4bd7-99f5-cff66973c94b)# IAM - ID 및 액세스 관리
+# IAM - ID 및 액세스 관리
 
 1. [IAM 소개: 사용자, 그룹, 정책](#1-IAM-소개:-사용자,-그룹,-정책)
 2. [IAM 정책](#2-IAM-정책)
