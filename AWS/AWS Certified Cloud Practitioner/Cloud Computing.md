@@ -209,3 +209,21 @@
 ---
 
 ## 6. 공동 책임 모델 및 AWS 허용 정책
+
+### Shared Responsibility Model(공동 책임 모델)
+![image](https://github.com/seonwook97/Certificate/assets/92377162/27f50aec-b1e7-45a6-860a-c81a687ff4b2)
+- 고객
+  - 고객으로서 클라우의 내의 보안 책임 -> 클라우드에서 무엇을 사용하고 어떻게 구성하든 모든 책임은 고객
+  - 보안, 데이터, 운영체제, 네트워크 방화벽 구성 등
+- AWS
+  - 클라우드에 관한 보안 책임이 있음
+  - 모든 인프라, 하드웨어, 소프트웨어, 자체 내부 보안 등
+- CCP에서 **AWS의 책임, 고객의 책임**에 대한 문제가 출제
+- https://aws.amazon.com/compliance/shared-responsibility-model/
+
+### AWS Acceptable Use Policy(이용 목적 제한 방침 동의)
+- https://aws.amazon.com/aup/
+- No Illegal, Harmful, or Offensive Use or Content
+- No Security Violations
+- No Network Abuse
+- No E-Mail or Other Message Abuse
