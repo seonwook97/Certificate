@@ -3,6 +3,7 @@
 1. [기존 IT 개요](#1-기존-IT-개요)
 2. [클라우드 컴퓨팅이란](#2-클라우드-컴퓨팅이란)
 3. [다양한 유형의 클라우드 컴퓨팅](#3-다양한-유형의-클라우드-컴퓨팅)
+4. [AWS 클라우드 개요](#4-AWS-클라우드-개요)
 
 ---
 
@@ -139,3 +140,12 @@
   - Data transfer OUT of the Cloud(클라우드에 들어오는 모든 데이터는 무료)
     
     ![image](https://github.com/seonwook97/Certificate/assets/92377162/20fcfb28-5d6a-4592-9218-bff1c730f744)
+
+---
+
+## 4. AWS 클라우드 개요
+
+### AWS 역사
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/22d03af7-14e3-468a-ba1b-32f74e2b341a)
+
