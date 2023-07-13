@@ -3,7 +3,7 @@
 1. [IAM 소개: 사용자, 그룹, 정책](#1-IAM-소개-사용자-그룹-정책)
 2. [IAM 정책](#2-IAM-정책)
 3. [IAM MFA 개요](#3-IAM-MFA-개요)
-4. [AWS 액세스 키, CLI 및 SDK](#4-AWS-액세스-키--CLI-및-SDK)
+4. [AWS 액세스 키, CLI 및 SDK](#4-AWS-액세스-키-CLI-및-SDK)
 
 ---
 
