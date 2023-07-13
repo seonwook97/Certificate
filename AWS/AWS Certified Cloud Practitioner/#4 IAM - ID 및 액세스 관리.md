@@ -54,3 +54,41 @@
     - Statement가 언제 적용될지 결정함 
 
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/e7c8fc54-a0a5-431b-b791-3f0cba93b05e)
+
+---
+
+## 3. IAM MFA 개요
+
+### IAM - Password Policy
+- Strong passwords = higher security for your account
+- In AWS, you can setup a password policy:
+  - Set a minimum password length
+  - Require specific character types:
+    - including uppercase letters
+    - lowercase letters
+    - numbers
+    - non-alphanumeric characters
+- Allow all IAM users to change their own passwords
+- Require users to change their password after some time (password expiration)
+- Prevent password re-use
+
+### Multi Factor Authentication - MFA(다요소 인증)
+- 사용자들은 계정에 접근 권한이 있고 관리자일 경우 구성을 변경하거나 리소스를 삭제하는 등의 작업을 할 수 있음
+- 적어도 루트 계정은 무슨 일이 있어도 반드시 보호해야 하며 전체 IAM 사용자들도 보호해야 함
+- MFA는 내가 알고 있는 비밀번호와 내가 가지고 있는 보안 장치를 함께 사용하는 것
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/268ab999-c399-48af-961c-590917e6469e)
+
+- MFA 장점
+  - 해킹을 당해 비밀번호가 누출된 상황이라고 해도 해커에게는 로그인을 위해 Alice 소유의 물리적 장치가 추가로 필요하기 때문에 계정을 침투받을 가능성이 적음
+
+### MFA devices options in AWS(AWS에서의 MFA 장치 옵션)
+- Virtual MFA device
+  - Google Authenticator(phone only)
+  - Auth(multi-device)
+  - 한 개의 기기에 다수의 토큰을 지원
+- Universal 2nd Factor(U2F) Security Key
+  - 하나의 보안 키에서 여러 루트 계정과 IAM 사용자를 지원
+- 그 외
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/6b081528-af92-4f49-8f67-fd939abeaf4e)
