@@ -2,6 +2,8 @@
 
 1. [IAM 소개: 사용자, 그룹, 정책](#1-IAM-소개-사용자-그룹-정책)
 2. [IAM 정책](#2-IAM-정책)
+3. [IAM MFA 개요](#3-IAM-MFA-개요)
+4. [AWS 액세스 키, CLI 및 SDK](#4-AWS-액세스-키--CLI-및-SDK)
 
 ---
 
@@ -92,3 +94,38 @@
 - 그 외
 
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/6b081528-af92-4f49-8f67-fd939abeaf4e)
+
+---
+
+## 4. AWS 액세스 키, CLI 및 SDK
+
+### AWS에 액세스하는 방법
+- 3가지
+  - AWS Management Console (protected by password + MFA) - AWS 콘솔
+  - AWS Command Line Interface (CLI): protected by access keys - 터미널에서 설정
+  - AWS Software Developer Kit (SDK) - for code: protected by access keys - 애플리케이션 코드 내에서 API를 호출하고자 할 때
+- 액세스 키 생성
+- 관리 콘솔을 통해 생성
+- 사용자들이 액세스 키를 직접 관리
+- 공유 X
+  - Access Key ID ~= username
+  - Secret Access Key ~= password
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/9b515dce-8b0c-43d6-b25f-8c814452fe8e)
+
+### AWS CLI
+- 명령줄 인터페이스로 AWS 서비스들과 상호작용할 수 있도록 해주는 도구
+- CLI를 사용하면 AWS 서비스의 공용 API로 직접 액세스 가능
+- 리소스를 관리하는 스크립트를 개발해 일부 작업을 자동화
+- 오픈소스: https://github.com/aws/aws-cli
+- 관리 콘솔 대신 사용하기도 함
+
+### AWS SDK
+- AWS Software Development Kit
+- 특정 언어로 된 라이브러리 집합 -> 프로그래밍 언어에 따라 개별 SDK 존재
+- AWS 서비스나 API에 프로그래밍을 위한 액세스가 가능하도록 지원
+- SDK는 터미널 내에서는 사용하는 것이 아니라 코딩을 통해 애플리케이션 내에 심어두어야 함
+  - 앱 내에 자체적으로 AWS SDK가 있는 것
+- 강의에서 사용하게 될 AWS CLI는 Boto라는 Python용 AWS SDK에 구축되어 있음
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/e26d7963-27cd-4674-94b3-20c19a189910)
