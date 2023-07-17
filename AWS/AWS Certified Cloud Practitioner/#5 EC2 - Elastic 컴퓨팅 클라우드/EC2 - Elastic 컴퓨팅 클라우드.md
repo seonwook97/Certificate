@@ -1,6 +1,7 @@
 # EC2 - Elastic 컴퓨팅 클라우드
 
 1. [EC2 기초](#1-EC2-기초)
+2. [웹 사이트 실습을 위한 EC2 사용자 데이터로 인스턴스 생성](#2-웹-사이트-실습을-위한-EC2-사용자-데이터로-인스턴스-생성)
 
 ---
 
@@ -40,3 +41,22 @@
   - Downloading common files from the internet
   - Anything you can think of
 - EC2 사용자 데이터 스크립트는 루트 계정에서 실행됨 -> 모든 명령문은 sudo
+
+###  EC2 instance types: example
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/c2449066-57d1-44ff-a517-e6d168a3b6c6)
+- https://instances.vantage.sh
+
+---
+
+## 2. EC2 인스턴스 유형 기본 사항
+- You can use different types of EC2 instances that are optimised for different use cases (https://aws.amazon.com/ec2/instance-types/)
+- AWS has the following naming convention:
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/523eddaa-8cd2-4114-a332-afb64c578c25)
+  - 크기가 클수록 인스턴스에 더 많은 메모리와 CPU를 가지게 됨
+
+### EC2 Instance Types - General Purpose
+- 범용의 인스턴스는 웹 서버나 코드 저장소와 같은 다양한 작업에 적합
+
+
