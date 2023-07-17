@@ -42,7 +42,7 @@
   - Anything you can think of
 - EC2 사용자 데이터 스크립트는 루트 계정에서 실행됨 -> 모든 명령문은 sudo
 
-###  EC2 instance types: example
+###  EC2 Instance Types: example
 
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/c2449066-57d1-44ff-a517-e6d168a3b6c6)
 - https://instances.vantage.sh
@@ -58,5 +58,46 @@
 
 ### EC2 Instance Types - General Purpose
 - 범용의 인스턴스는 웹 서버나 코드 저장소와 같은 다양한 작업에 적합
+- Balance between:
+  - Compute
+  - Memory
+  - Networking
+- 강의에서는 범용 인스턴스의 프리티어인 t2.micro 사용
 
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/6baf4541-f2f0-464d-bd84-5f4db80e814b)
 
+### EC2 Instance Types - Compute Optimized
+- 컴퓨팅 최적화 인스턴스는 컴퓨터 집약적인 작업에 최적화된 인스턴스
+- 고성능 프로세서는 어디에 사용?
+  - Batch processing workloads - 일부 데이터의 일괄 처리
+  - Media transcoding - 미디어 트랜스코딩 작업
+  - High performance web servers - 고성능 웹 서버 필요 시
+  - High performance computing (HPC) - 고성능 컴퓨팅이라는 HPC 작업을 할 때
+  - Scientific modeling & machine learning - 머신러닝
+  - Dedicated gaming servers - 전용 게임 서버      
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/04f25d11-7a8c-4f9f-b688-8842c2ae1dc6)
+
+### EC2 Instance Types - Memory Optimized
+- 메모리(RAM)에서 대규모 데이터셋을 처리하는 유형의 작업에 바른 성능을 제공
+- 사용사례:
+  - 대부분 인메모리 DB가 되는 고성능의 관계형 또는 비관계형의 DB에 사용
+  - 일래스틱 캐시를 예로 들 수 있는 분산 웹스케일 캐시 저장소에도 사용
+  - BI에 최적화된 인 메모리 DB와 대규모 비정형 데이터의 실시간 처리를 실행하는 애플리케이션에도 사용
+  - 메모리 최적화 인스턴스의 이름을 보면 R로 시작(X1, Z1도 있음)
+
+    ![image](https://github.com/seonwook97/Certificate/assets/92377162/46cc1eee-69b3-444d-9440-30d1d8eb95b5)
+
+### EC2 Instance Types - Storage Optimized
+- 로컬 스토리지에서 대규모의 데이터셋에 액세스할 때 적합한 인스턴스
+- 스토리지 최적화 인스턴스의 사용 사례:
+  - 고주파 온라인 트랜잭션 처리인 OLTP 시스템에 사용
+  - 관계형과 비관계형인 NoSQL 데이터베이스에 사용
+  - 레디스와 같은 메모리 데이터베이스의 캐시
+  - 데이터 웨어하우징 애플리케이션
+  - 분산 파일 시스템에 사용
+- AWS의 스토리 최적화 인스턴스는 이름이 I, G 또는 H1으로 시작
+
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/257652c6-86ac-487f-9713-5e1eea2672fc)
+
+- 작은 메모리나 많은 CPU 등 네트워크 성능에 따라 EBS 대역폭 등이 달라짐
