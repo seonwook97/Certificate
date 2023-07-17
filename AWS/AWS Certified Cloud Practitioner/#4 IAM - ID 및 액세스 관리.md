@@ -6,6 +6,9 @@
 4. [AWS 액세스 키, CLI 및 SDK](#4-AWS-액세스-키-CLI-및-SDK)
 5. [AWS 서비스에 대한 IAM 역할](#5-AWS-서비스에-대한-IAM-역할)
 6. [IAM 보안 도구](#6-IAM-보안-도구)
+7. [IAM 모범 사례](#7-IAM-모범-사례)
+8. [IAM을 위한 공동 책임 모델](#8-IAM을-위한-공동-책임-모델)
+9. [IAM 요약](#9-IAM-요약)
 
 ---
 
@@ -156,3 +159,46 @@
     - 최소 권한의 원칙을 따랐을 때 매우 도움되는 정보
   - 해당 도구를 사용하여 어떤 권한이 사용되지 않는지 볼 수 있음
     - 사용자의 권한을 줄여 최소권한의 원칙을 지킬 수 있음
+
+---
+
+## 7. IAM 모범 사례
+- 루트 계정은 AWS 계정을 설정할 때를 제외하고 사용하지 마세요
+  - 현재 계정: 루트 계정, 개인 계정
+- One physical user = One AWS user
+- 사용자를 그룹에 넣어 해당 그룹에 권한을 부여할 수 있음
+- 비밀번호 정책을 강하게 생성
+- 다요소 인증 사용(MFA - Multi Factor Authentication)
+- AWS 서비스에 권한을 부여할 때마다 역할을 만들고 사용(가상서버인 EC2 인스턴스 포함)
+- AWS를 프로그래밍 할 경우 즉, CLI나 SDK를 사용할 경우 반드시 액세스 키를 만들어야 함 - 액세스 키는 비밀번호와 같음
+- 계정의 권한을 감사할 때는 IAM 자격 증명 보고서와 IAM 액세스 분석기를 사용(IAM Credentials Report & IAM Access Advisor)
+
+---
+
+## 8. IAM을 위한 공동 책임 모델
+- **CCP에는 공동 책임 모델(Shared Responsibility Model)에 관한 질문이 많이 출제됨**
+- AWS
+  - Infrastructure(global network security): 인프라와 글로벌 네트워크 보안
+  - Configuration and vulnerability analysis: 구성과 취약성 분석 서비스
+  - Compliance validation: 책임사항을 모두 준수
+- 개인
+  - IAM에서는 AWS가 제공하지 않는 많은 것들이 개인의 책임
+  - 자체사용자(Users), 그룹(Groups), 역할(Roles), 정책(Policies)을 생성/관리/모니터링
+  - 모든 계정에서 MFA를 활성화하고 시행하는 것
+  - 키를 자주 교체하는 것
+  - IAM 도구를 사용해서 적합한 권한을 적용했는지 확인
+  - 액세스 패턴을 분석하고 계정 권한을 검토
+- **AWS는 모든 인프라에 대한 책임**이 있고, **사용자는 인프라 사용에 관한 책임**이 있음
+
+---
+
+## 9. IAM 요약
+- **Users**: IAM 사용자가 반드기 기업 내 실제 사용자와 매핑되어야 함. 사용자는 AWS 콘솔의 비밀번호를 가지고 있음
+- **Groups**: contains users only
+- **Policies**: 사용자 또는 그룹의 권한을 설명하는 정책과 연결하거나 JSON 문서를 공유할 수 있음
+- **Roles**: 역할을 생성할 수 있고, EC2 인스턴스나 다른 AWS 서비스를 위한 자격 증명이 됨
+- **Security**: MFA + Password Policy
+- **AWS CLI**: 명령줄을 사용해 서비스를 관리
+- **AWS SDK**: 프로그래밍 언어를 사용해 AWS 서비스를 관리
+- **Access Keys**: CLI나 SDK를 사용해서 AWS 액세스를 위한 액세스 키 생성
+- **Audit**: IAM Credential Reports(IAM 자격 증명 보고서 생성) & IAM Access Advisor(IAM 사용량 감사)
