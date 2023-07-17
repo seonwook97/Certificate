@@ -4,6 +4,8 @@
 2. [IAM 정책](#2-IAM-정책)
 3. [IAM MFA 개요](#3-IAM-MFA-개요)
 4. [AWS 액세스 키, CLI 및 SDK](#4-AWS-액세스-키-CLI-및-SDK)
+5. [AWS 서비스에 대한 IAM 역할](#5-AWS-서비스에-대한-IAM-역할)
+6. [IAM 보안 도구](#6-IAM-보안-도구)
 
 ---
 
@@ -129,3 +131,26 @@
 - 강의에서 사용하게 될 AWS CLI는 Boto라는 Python용 AWS SDK에 구축되어 있음
 
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/e26d7963-27cd-4674-94b3-20c19a189910)
+
+---
+
+## 5. AWS 서비스에 대한 IAM 역할
+- 몇몇의 AWS 서비스는 본인 계정으로 진행해야 함
+- AWS 서비스에 권한을 부여하기 위해 IAM 역할을 만들어야 함
+  - EC2 인스턴스가 AWS에 있는 어떤 정보에 접근하려고 할 때 IAM 역할을 사용
+    
+    ![image](https://github.com/seonwook97/Certificate/assets/92377162/713ac71d-58db-4fc5-8498-6c6c48ef9923)
+
+- 몇가지 일반적인 역할
+  - EC2 Instance Roles
+  - Lambda Function Roles
+  - Roles for CloudFormation
+
+---
+
+## 6. IAM 보안 도구
+- IAM Credentials Report(account-level): IAM 자격 증명 보고서
+  - 보고서는 계정에 있는 사용자와 다양한 자격 증명의 상태를 포함
+- IAM Access Advisor(user-level): IAM 액세스 관리자
+  - 사용자에게 부여된 서비스 권한과 해당 서비스에 마지막으로 액세스한 시간이 보임 -> 최소 권한의 원칙을 따랐을 때 매우 도움되는 정보
+  - 해당 도구를 사용하여 어떤 권한이 사용되지 않는지 볼 수 있음 -> 사용자의 권한을 줄여 최소권한의 원칙을 지킬 수 있음
