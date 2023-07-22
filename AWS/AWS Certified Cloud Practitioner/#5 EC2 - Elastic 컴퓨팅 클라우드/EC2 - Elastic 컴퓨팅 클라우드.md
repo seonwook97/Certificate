@@ -5,8 +5,9 @@
 3. [보안 그룹 및 클래식 포트 개요](#3-보안-그룹-및-클래식-포트-개요)
 4. [SSH 개요](#4-ssh-개요)
 5. [SSH 문제 해결](#5-ssh-문제-해결)
-6. [EC2 요약 1](#6-ec2-요약-1)
-7. [EC2 요약 2](#7-ec2-요약-2)
+6. [EC2 인스턴스 구매 옵션](#6-ec2-인스턴스-구매-옵션)
+7. [EC2 요약 1](#7-ec2-요약-1)
+8. [EC2 요약 2](#8-ec2-요약-2)
 
 ---
 
@@ -218,7 +219,11 @@
 
 ---
 
-## 6. EC2 요약 1
+## 6. EC2 인스턴스 구매 옵션
+
+---
+
+## 7. EC2 요약 1
 
 ### Shared Responsibility Model for EC2
 
@@ -236,7 +241,7 @@
 
 ---
 
-## 7. EC2 요약 2
+## 8. EC2 요약 2
 
 ### EC2 Section - Summary
 - **EC2 Instance**: AMI (OS) + Instance Size (CPU + RAM) + Storage + security groups + EC2 User Data
