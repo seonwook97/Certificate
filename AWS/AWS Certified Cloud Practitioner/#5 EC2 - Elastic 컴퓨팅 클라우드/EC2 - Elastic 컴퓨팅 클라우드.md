@@ -5,6 +5,8 @@
 3. [보안 그룹 및 클래식 포트 개요](#3-보안-그룹-및-클래식-포트-개요)
 4. [SSH 개요](#4-ssh-개요)
 5. [SSH 문제 해결](#5-ssh-문제-해결)
+6. [EC2 요약 1](#6-ec2-요약-1)
+7. [EC2 요약 2](#7-ec2-요약-2)
 
 ---
 
@@ -216,3 +218,30 @@
 
 ---
 
+## 6. EC2 요약 1
+
+### Shared Responsibility Model for EC2
+
+- AWS
+  - 모든 데이터 센터와 인프라에 관한 보안 책임이 있음
+  - 사용자가 물리적 호스트와 분리된 상태인지 확인하는 책임이 있음
+  - 서버 장애로 결함 있는 하드웨어를 교체하거나 동의한 규정을 준수하고 있는지 확인해야 하는 책임이 있음
+
+- 사용자
+  - 클라우드 내의 보안을 책임, 자체 보안 그룹 규칙을 정의 -> EC2 인스턴스에 사용자 또는 다른 사용자의 액세스를 허용하는 것
+  - EC2 인스턴스 내부에 전체 가상 머신을 소유 -> 운영체제가 Windows나 Linux임을 의미하며 모든 패치와 업데이트를 AWS가 아니라 사용자가 해야 함, AWS는 가상 머신만 제공
+  - EC2 인스턴스에 모든 소프트웨어와 유틸리티가 설치되어 있음 -> 사용 방법은 사용자 책임
+  - IAM 역할의 할당 방법을 이해하고 권한이 올바른지 확인해야 함
+  - 인스턴스의 데이터가 안전한지 확인하는 것도 매우 중요한 책임
+
+---
+
+## 7. EC2 요약 2
+
+### EC2 Section - Summary
+- **EC2 Instance**: AMI (OS) + Instance Size (CPU + RAM) + Storage + security groups + EC2 User Data
+- **Security Groups**: Firewall attached to the EC2 instance
+- **EC2 User Data**: Script launched at the first start of an instance
+- **SSH**: start a terminal into our EC2 Instances (port 22)
+- **EC2 Instance Role**: link to IAM roles
+- **Purchasing Options**: On-Demand, Spot, Reserved (Standard + Convertible + Scheduled), Dedicated Host, Dedicated Instance
