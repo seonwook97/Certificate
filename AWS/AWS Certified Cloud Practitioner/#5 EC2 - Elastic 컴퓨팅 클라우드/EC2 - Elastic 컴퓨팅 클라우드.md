@@ -221,93 +221,93 @@
 
 ## 6. EC2 인스턴스 구매 옵션
 
-### EC2 Instances Purchasing Options
-- On-Demand Instances – short workload, predictable pricing, pay by second
-- Reserved (1 & 3 years)
-  - Reserved Instances – long workloads
-  - Convertible Reserved Instances – long workloads with flexible instances
-- Savings Plans (1 & 3 years) –commitment to an amount of usage, long workload
-- Spot Instances – short workloads, cheap, can lose instances (less reliable)
-- Dedicated Hosts – book an entire physical server, control instance placement
-- Dedicated Instances – no other customers will share your hardware
-- Capacity Reservations – reserve capacity in a specific AZ for any duration
+### EC2 인스턴스 구매 옵션
+- 온디맨드 인스턴스 – 짧은 워크로드, 예측 가능한 가격, 초당 지불
+- 예약(1년 및 3년)
+  - 예약된 인스턴스 – 긴 워크로드
+  - 전환 가능한 예약 인스턴스 – 유연한 인스턴스를 통해 긴 워크로드 지원
+- 절약 계획(1년 및 3년) – 사용량과 긴 워크로드에 대한 헌신
+- 스폿 인스턴스 – 짧은 워크로드, 저렴한 워크로드, 인스턴스 손실(신뢰성 저하)
+- 전용 호스트 – 전체 물리적 서버 예약, 인스턴스 배치 제어
+- 전용 인스턴스 – 다른 고객이 하드웨어를 공유하지 않음
+- 용량 예약 – 특정 AZ에서 모든 기간 동안 용량 예약
 
-### EC2 On Demand
-- Pay for what you use:
-  - Linux or Windows - billing per second, after the first minute
-  - All other operating systems - billing per hour
-- Has the highest cost but no upfront payment
-- No long-term commitment
-- Recommended for short-term and un-interrupted workloads, where you can't predict how the application will behave
+### EC2 온디맨드
+- 사용 비용 지불:
+  - Linux 또는 Windows - 1분 후 초당 과금
+  - 기타 모든 운영 체제 - 시간당 과금
+- 비용은 가장 높지만 선불은 없습니다
+- 장기적인 약속 없음
+- 애플리케이션 작동 방식을 예측할 수 없는 단기 및 무중단 워크로드에 권장
 
-### EC2 Reserved Instances
-- Up to 72% discount compared to On-demand
-- You reserve a specific instance attributes (Instance Type, Region, Tenancy, OS)
-- Reservation Period – 1 year (+discount) or 3 years (+++discount)
-- Payment Options – No Upfront (+), Partial Upfront (++), All Upfront (+++)
-- Reserved Instance’s Scope – Regional or Zonal (reserve capacity in an AZ)
-- Recommended for steady-state usage applications (think database)
-- You can buy and sell in the Reserved Instance Marketplace
-- Convertible Reserved Instance
-  - Can change the EC2 instance type, instance family, OS, scope and tenancy
-  - Up to 66% discount
+### EC2 예약 인스턴스
+- 온디맨드 대비 최대 72% 할인
+- 특정 인스턴스 특성(인스턴스 유형, 지역, 테넌트, OS)을 예약합니다
+- 예약 기간 – 1년(+할인) 또는 3년(++할인)
+- 지불 옵션 – 선불 없음(+), 부분 선불(+), 모두 선불(++)
+- 예약 인스턴스의 범위 – 지역 또는 지역(예약)eAZ의 용량)
+- 정상 상태 사용 애플리케이션(think 데이터베이스)에 권장
+- 예약 인스턴스 마켓플레이스에서 구매 및 판매할 수 있습니다
+- 변환 가능한 예약 인스턴스
+  - EC2 인스턴스 유형, 인스턴스 패밀리, OS, 범위 및 테넌트를 변경할 수 있습니다
+  - 최대 66% 할인
 
-### EC2 Savings Plans
-- Get a discount based on long-term usage (up to 72% - same as RIs)
-- Commit to a certain type of usage ($10/hour for 1 or 3 years)
-- Usage beyond EC2 Savings Plans is billed at the On-Demand price
-- Locked to a specific instance family & AWS region (e.g., M5 in us-east-1)
-- Flexible across:
-  - Instance Size (e.g., m5.xlarge, m5.2xlarge)
-  - OS (e.g., Linux, Windows)
-  - Tenancy (Host, Dedicated, Default)
+### EC2 저축 계획
+- 장기 사용량을 기준으로 할인 적용(최대 72% - RI와 동일)
+- 특정 유형의 사용(1년 또는 3년 동안 시간당 10달러)을 약속합니다
+- EC2 절감 플랜을 초과하는 사용량은 온디맨드 가격으로 청구됩니다
+- 특정 인스턴스 패밀리 및 AWS 영역(예: us-east-1의 M5)에 잠금
+- 유연한 전체 환경:
+  - 인스턴스 크기(예: m5.xlarge, m)5.2배 큼)
+  - OS(예: Linux, Windows)
+  - 테넌트(호스트, 전용, 기본)
 
-### EC2 Spot Instances
-- Can get a discount of up to 90% compared to On-demand
-- Instances that you can “lose” at any point of time if your max price is less than the current spot price
-- The MOST cost-efficient instances in AWS
-- Useful for workloads that are resilient to failure
-  - Batch jobs
-  - Data analysis
-  - Image processing
-  - Any distributed workloads
-  - Workloads with a flexible start and end time
-- Not suitable for critical jobs or databases
+### EC2 스폿 인스턴스
+- On-Demand 대비 최대 90%
+- 최대 가격이 현재 현물 가격보다 낮은 경우 언제든지 "손실"할 수 있는 인스턴스
+- AWS에서 가장 비용 효율적인 인스턴스
+- 장애에 대한 탄력적인 워크로드에 유용
+  - 배치 작업
+  - 데이터 분석
+  - 이미지 처리
+  - 임의의 분산 workloads
+  - 시작 및 종료 시간이 유연한 워크로드
+- 중요 작업 또는 데이터베이스에 적합하지 않음
 
-### EC2 Dedicated Hosts
-- A physical server with EC2 instance capacity fully dedicated to your use
-- Allows you address compliance requirements and use your existing serverbound software licenses (per-socket, per-core, pe—VM software licenses)
-- Purchasing Options:
-- On-demand – pay per second for active Dedicated Host
-- Reserved - 1 or 3 years (No Upfront, Partial Upfront, All Upfront)
-- The most expensive option
-- Useful for software that have complicated licensing model (BYOL – Bring Your Own License)
-- Or for companies that have strong regulatory or compliance needs
+### EC2 전용 호스트
+- 사용자 전용 EC2 인스턴스 용량을 갖춘 물리적 서버
+- 규정 준수 요구사항을 해결하고 기존 서버 바인딩 소프트웨어 라이센스(소켓별, 코어별, PE-VM 소프트웨어 라이센스)를 사용할 수 있습니다
+- 구매 옵션:
+- 온디맨드 – 활성 전용 호스트에 대해 초당 지불
+- 예약 - 1년 또는 3년(없음) 선불, 부분 선불, 모두 선불)
+- 가장 비싼 옵션
+- 라이센스 모델이 복잡한 소프트웨어에 유용합니다(BYOL – BYOL 자체 라이센스 가져오기)
+- 또는 강력한 규제 또는 규정 준수 요구가 있는 기업의 경우
 
-### EC2 Dedicated Instances
-- Instances run on hardware that’s dedicated to you
-- May share hardware with other instances in same account
-- No control over instance placement(can move hardware after Stop / Start)
-
+### EC2 전용 인스턴스
+- 사용자 전용 하드웨어에서 인스턴스 실행
+- 동일한 계정의 다른 인스턴스와 하드웨어를 공유할 수 있음
+- 인스턴스 배치를 제어할 수 없음(중지/시작 후 하드웨어 이동 가능)
+  
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/92668b9e-2b93-42ec-b02a-95da436d5050)
 
-### EC2 Capacity Reservations
-- Reserve On-Demand instances capacity in a specific AZ for any duration
-- You always have access to EC2 capacity when you need it
-- No time commitment (create/cancel anytime), no billing discounts
-- Combine with Regional Reserved Instances and Savings Plans to benefit from billing discounts
-- You’re charged at On-Demand rate whether you run instances or not
-- Suitable for short-term, uninterrupted workloads that needs to be in a specific AZ
+### EC2 용량 예약
+- 특정 AZ에서 일정 기간 동안 온디맨드 인스턴스 용량 예약
+- 필요할 때 항상 EC2 용량에 액세스할 수 있습니다
+- 시간 약속 없음(언제든지 만들기/취소), 청구 할인 없음
+- 지역 예약 인스턴스 및 절감 계획과 결합하여 청구 할인 혜택을 누릴 수 있습니다
+- 당신은 On-Dema에서 청구됩니다인스턴스 실행 여부를 평가합니다
+- 특정 AZ에 있어야 하는 중단 없는 단기 워크로드에 적합
 
-### Which purchasing option is right for me
-- On demand: coming and staying in resort whenever we like, we pay the full price
-- Reserved: like planning ahead and if we plan to stay for a long time, we may get a good discount.
-- Savings Plans: pay a certain amount per hour for certain period and stay in any room type (e.g. King, Suite, Sea View, …)
-- Spot instances: the hotel allows people to bid for the empty rooms and the highest bidder keeps the rooms. You can get kicked out at any time
-- Dedicated Hosts: We book an entire building of the resort
-- Capacity Reservations: you book a room for a period with full price even you don’t stay in it
+### 나에게 적합한 구매 옵션은 무엇입니까
+- 온 디맨드: 언제든지 리조트에 와서 머무르며, 우리는 모든 가격을 지불합니다
+- 예약: 미리 계획을 세우는 것과 같이, 만약 우리가 오랫동안 머물 계획이라면, 우리는 좋은 할인을 받을 수 있습니다.
+- 절약 플랜: 특정 기간 동안 시간당 일정 금액을 지불하고 모든 객실 유형(예: 킹, 스위트, 씨뷰 등)에서 숙박합니다
+- 현장 사례: 호텔은 빈 객실에 대한 입찰을 허용하고 가장 높은 입찰자가 객실을 유지합니다. 당신은 언제든지 쫓겨날 수 있습니다
+- 전용 호스트: 리조트의 전체 건물을 예약합니다
+- 용량 예약: 숙박하지 않더라도 일정 기간 동안 정가로 방을 예약합니다
 
-### Price Comparison Example – m4.large – us-east-1
+### 가격 비교 예 – m4.large – us-east-1
 
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/6eb452ec-2e90-4fc6-ab4d-7944681cf9af)
 
