@@ -73,3 +73,21 @@
   - 소스 코드를 실행하는 위치에서 조건, 루프, 배열, 목록 및 기타 프로그래밍 요소를 사용하여 AWS 서비스를 관리할 수 있음
 
 ## 6. 코드형 인프라(IaC)
+### AWS CDK
+- 클라우드 인프라를 코드로 정의하고 **AWS CloudFormation**을 통해 프로비저닝하는 소프트웨어 개발 프레임워크
+- TypeScript, JavaScript, Python, Java, C#/.Net 및 Go(개발자 평가판으로 제공 중)와 같은 익숙한 프로그래밍 언어를 지원
+- 프로그래밍 언어의 익숙함과 표현 기능을 사용하여 애플리케이션을 모델링함
+- 클라우드 리소스를 검증된 기본값으로 미리 구성하는 구문이라는 고급 구성 요소를 제공하므로 클라우드 애플리케이션을 쉽게 구축할 수 있음
+- AWS CloudFormation을 통해 리소스를 안전하고 반복 가능한 방식으로 프로비저닝함
+- 조직의 요구 사항을 통합하는 고유한 사용자 정의 구문을 작성하고 공유하여 새 프로젝트를 신속하게 진행할 수 있음
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/0672e361-7326-4cfd-a85d-bd82ef38b407)
+
+### AWS CloudFormation
+- AWS 리소스를 모델링하고 설정하여 애플리케이션에 더 많은 시간을 할애하고 리소스 관리에 소요되는 시간을 줄이는 데 도움
+- CloudFormation을 사용할 때는 원하는 모든 AWS 리소스(예: Amazon EC2 인스턴스 또는 Amazon RDS DB 인스턴스)를 설명하는 템플릿을 만듦
+- 템플릿을 만들면 리소스를 프로비저닝하고 구성하는 작업을 CloudFormation이 대신 처리함
+- 개별적으로 AWS 리소스를 생성 및 구성하고 리소스 간의 종속성을 확인할 필요 없이 CloudFormation이 이 모든 작업을 처리함
+- CloudFormation은 인프라 관리를 간소화하고, 인프라를 신속하게 복제하며, 인프라를 손쉽게 제어하고, 인프라 변경 사항을 추적하는 데 도움이 될 수 있음
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/bd7cb25a-70ad-4d0b-bcd3-2ac60bb99a3c)
