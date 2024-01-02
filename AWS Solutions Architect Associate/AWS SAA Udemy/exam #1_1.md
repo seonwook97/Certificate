@@ -143,44 +143,44 @@ Amazon CloudFront는 지연 시간을 개선하는 지역 엣지 캐시 형태�
 
 개발 팀에는 Amazon S3 버킷을 나열하고 해당 버킷에서 **객체를 삭제할 수 있는 권한**이 필요합니다. 시스템 관리자는 버킷에 대한 액세스를 제공하기 위해 다음 IAM 정책을 생성하고 해당 정책을 그룹에 적용했습니다. 그룹은 버킷의 객체를 삭제할 수 없습니다. 회사는 최소 권한의 원칙을 따릅니다.
     
-    ```json
-        "Version": "2021-10-17",
-        "Statement": [
-            {
-                "Action": [
-                    "s3:ListBucket",
-                    "s3:DeleteObject"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::example-bucket"
-                ],
-                "Effect": "Allow"
-            }
-        ]
+```json
+    "Version": "2021-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:ListBucket",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::example-bucket"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+
+```
     
-    ```
+이 문제를 해결하기 위해 솔루션 설계자가 정책에 추가해야 하는 설명은 무엇입니까?
     
-    이 문제를 해결하기 위해 솔루션 설계자가 정책에 추가해야 하는 설명은 무엇입니까?
+```json
+{
+    "Action": [
+        "s3:DeleteObject"
+    ],
+    "Resource": [
+        "arn:aws:s3:::example-bucket/*"
+    ],
+    "Effect": "Allow"
+}
+```
     
-    ```json
-    {
-        "Action": [
-            "s3:DeleteObject"
-        ],
-        "Resource": [
-            "arn:aws:s3:::example-bucket/*"
-        ],
-        "Effect": "Allow"
-    }
-    ```
-    
-    → `효과: 명령문이 작업을 허용할지 아니면 거부할지 지정합니다( Allow여기에 정의된 효과입니다).`
-    
-    `작업: 입력된 효과에 따라 실행이 허용되거나 거부되는 특정 작업을 설명합니다. API 작업은 각 서비스마다 고유합니다( DeleteObject여기에 정의된 작업).`
-    
-    `리소스: Amazon 리소스 이름(ARN) 형식으로 정책이 적용되는 리소스(예: Amazon S3 버킷 또는 객체)를 지정합니다( example-bucket/*여기에 정의된 리소스입니다).`
-    
-    `이 정책은 Amazon S3 버킷의 리소스에 대해 필요한 삭제 권한을 그룹에 제공합니다.`
+→ `효과: 명령문이 작업을 허용할지 아니면 거부할지 지정합니다( Allow여기에 정의된 효과입니다).`
+
+`작업: 입력된 효과에 따라 실행이 허용되거나 거부되는 특정 작업을 설명합니다. API 작업은 각 서비스마다 고유합니다( DeleteObject여기에 정의된 작업).`
+
+`리소스: Amazon 리소스 이름(ARN) 형식으로 정책이 적용되는 리소스(예: Amazon S3 버킷 또는 객체)를 지정합니다( example-bucket/*여기에 정의된 리소스입니다).`
+
+`이 정책은 Amazon S3 버킷의 리소스에 대해 필요한 삭제 권한을 그룹에 제공합니다.`
     
 
 전자 상거래 회사의 소프트웨어 엔지니어링 인턴은 Amazon EC2 API를 통해 Amazon EC2 인스턴스를 프로비저닝하는 프로세스 흐름을 문서화하고 있습니다. 이러한 인스턴스는 인사부 급여 데이터를 처리하는 내부 애플리케이션에 사용됩니다. 그는 부팅 볼륨으로 사용할 수 없는 볼륨 유형을 강조하고 싶습니다.
