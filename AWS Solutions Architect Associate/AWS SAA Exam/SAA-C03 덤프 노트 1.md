@@ -522,7 +522,7 @@
     
     - 수 천 개의 Edge 장치로부터 경고 수집 및 저장 = Kinesis
     - Kinesis Firehose Delivery Stream 에서 데이터 수집
-        - 다양한 유형의 소스를 사용하여 Kinesis Data Firehose 전송 스트림으로 데이터를 보낼 수 있
+        - 다양한 유형의 소스를 사용하여 Kinesis Data Firehose 전송 스트림으로 데이터를 보낼 수 있음
     - Kinesis Firehose 에서 S3 로 데이터 전송
         - Kinesis Data Firehose 전송 스트림을 설정할 때 데이터의 최종 대상을 선택
         - 대상 옵션은 Amazon S3, Amazon OpenSearch Service 및 Amazon Redshift
