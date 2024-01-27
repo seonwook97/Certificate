@@ -667,3 +667,64 @@
     
     - 리소스 그룹을 통해 한 번에 여러 인스턴스를 업데이트 가능함
     - 리소스 그룹이 명령 대상으로 지원됨에 따라 해당 리소스 그룹에 속한 모든 관리형 인스턴스에서 관리 및 임시 작업을 자동화할 수 있음
+
+**AWS Simple Email Service, AWS Lambda, AWS EvenetBridge**
+- 회사는 REST API로 검색하기 위해 주문 배송 통계를 제공하는 애플리케이션을 개발 중
+- 회사는 배송 통계를 추출하고 데이터를 읽기 쉬운 HTML 형식으로 구성하고 매일 아침 여러 이메일 
+주소로 보고서를 보내려고 함
+    
+    → **Amazon Simple Email Service(Amazon SES)를 사용하여 데이터 형식을 지정하고 보고서를 이메일로 보냄
+    → AWS Lambda 함수를 호출하여 데이터에 대한 애플리케이션의 API를 쿼리하는 Amazon EventBridge(Amazon CloudWatch Events) 예약 이벤트를 생성함**
+    
+    - AWS Lambda를 사용하여 배송 통계를 추출하고 데이터를 HTML 형식으로 구성할 수 있음
+    - AWS Lambda를 사용하여 배송 통계를 추출하고 데이터를 HTML 형식으로 구성할 수 있음
+
+**AWS 다중 AZ Auto Scaling, AWS Elastic File System**
+- 회사에서 온프레미스 애플리케이션을 AWS로 마이그레이션하려고 함
+- 애플리케이션은 수십 기가바이트에서 수백 테라바이트까지 다양한 크기의 출력 파일을 생성함
+- 애플리케이션 데이터는 표준 파일 시스템 구조로 저장되어야 함
+- 회사는 자동으로 확장되는 솔루션을 원함. 고가용성이며 최소한의 운영 오버헤드가 필요
+    
+    → **다중 AZ Auto Scaling 그룹의 Amazon EC2 인스턴스로 애플리케이션을 마이그레이션함. 스토리지에 Amazon Elastic File System(Amazon EFS)을 사용함**
+    
+    - EFS 는 표준 파일 시스템으로 자동 확장되며 가용성이 높음
+    - EBS는 여러 EC2 인스턴스에서 동시 접속할 수 없다는 단점이 치명적임
+    - Amazon Elastic File System 은 전체 파일 시스템 액세스 의미 체계를 지원하는 표준 파일 시스템 
+    인터페이스를 제공함
+
+**Amazon S3 Standard, Glacier Deep Archive, Object Lock**
+- 회사는 Amazon S3 에 회계 기록을 저장해야 함
+- 기록은 1년 동안 즉시 액세스할 수 있어야 하며 그 후 추가로 9년 동안 보관해야 함
+- 관리자 및 루트 사용자를 포함하여 회사의 그 누구도 전체 10년 동안 기록을 삭제할 수 없음
+- 기록은 최대한의 복원력으로 저장해야 함
+    
+    → **S3 수명 주기 정책을 사용하여 1 년 후에 S3 Standard 에서 S3 Glacier Deep Archive로 레코드를 전환함. 10년 동안 규정 준수 모드에서 S3 Object Lock을 사용함**
+    
+    - S3 Standard: 즉시 액세스 가능
+    - S3 Glacier Deep Archive: 콜드 스토리지 보관용으로 사용됨
+    - Object Lock으로 객체 삭제 방지
+
+**AWS FSx for Windows File Server**
+- 회사는 AWS에서 여러 Windows 워크로드를 실행함
+- 회사 직원은 두 개의 Amazon EC2 인스턴스에서 호스팅 되는 Windows 파일 공유를 사용함
+- 파일 공유는 서로 간에 데이터를 동기화하고 중복 복사본을 유지함
+- 회사는 사용자가 현재 파일에 액세스하는 방식을 보존하는 고가용성 및 내구성 스토리지 솔루션을
+원함
+    
+    → **다중 AZ 구성을 사용하여 파일 공유 환경을 Windows 파일 서버용 Amazon FSx로 확장함. 모든 
+    데이터를 Windows 파일 서버용 FSx 로 마이그레이션함**
+    
+    - Amazon FSx for Windows File Server는 완전히 네이티브로 지원되는 완전히 관리되는
+    Microsoft Windows 파일 서버를 제공함
+
+**AWS Private Subnet**
+- 솔루션 설계자는 여러 서브넷을 포함하는 VPC 아키텍처를 개발 중
+- Amazon EC2 인스턴스 및 Amazon RDS DB 인스턴스를 사용하는 애플리케이션을 호스팅함
+- 아키텍처는 2 개의 가용 영역에 있는 6 개의 서브넷으로 구성됨
+- 각 가용영역에는 퍼블릭 서브넷, 프라이빗 서브넷 및 데이터베이스용 전용 서브넷이 포함됨
+- 프라이빗 서브넷에서 실행되는 EC2 인스턴스만 RDS 데이터베이스에 액세스할 수 있음
+    
+    → **프라이빗 서브넷의 인스턴스에 할당된 보안 그룹의 인바운드 트래픽을 허용하는 보안 그룹을 생성함. 보안 그룹을 DB 인스턴스에 연결함**
+    
+    - 프라이빗 서브넷의 인스턴스에 할당된 보안 그룹의 인바운드 트래픽을 허용하는 보안 그룹을 생성하면 프라이빗 서브넷에서 실행되는 EC2만 RDS 데이터베이스에 액세스할 수 있음.
+    - 보안 그룹을 DB 와 연결하여 지정된 보안 그룹에 속한 인스턴스로만 접근을 제한함
