@@ -15,7 +15,7 @@
 - 기존 아키텍처에 대한 최소한의 변경으로 분석을 수행
 - 최소한의 운영 오버헤드로 이러한 요구 사항을 충족
     
-    → **Amazon S3와 함께 Amazon Athena Athena를 직접 사용하여 필요에 따라 쿼리를 실행**
+    → **Amazon S3와 함께 Amazon Athena를 직접 사용하여 필요에 따라 쿼리를 실행**
     
     - S3에 쿼리하는 건 Athena
     - Athena가 사용 가능한 모든 리전에서 Amazon Athena를 사용하여 표준 SQL로 Amazon S3 인벤토리를 쿼리할 수 있음
