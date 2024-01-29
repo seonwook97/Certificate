@@ -728,3 +728,65 @@
     
     - 프라이빗 서브넷의 인스턴스에 할당된 보안 그룹의 인바운드 트래픽을 허용하는 보안 그룹을 생성하면 프라이빗 서브넷에서 실행되는 EC2만 RDS 데이터베이스에 액세스할 수 있음.
     - 보안 그룹을 DB 와 연결하여 지정된 보안 그룹에 속한 인스턴스로만 접근을 제한함
+
+**Amazon Certificate Manager**
+- 회사는 Amazon Route 53에 도메인 이름을 등록함
+- 회사는 ca-central-1 리전의 Amazon API Gateway를 백엔드 마이크로서비스 API의 공용 인터페이스로 사용함
+- 타사 서비스는 API를 안전하게 사용함
+- 회사는 타사 서비스에서 HTTPS를 사용할 수 있도록 회사의 도메인 이름 및 해당 인증서로 API 게이트웨이 URL을 설계하려고 함
+    
+    → **리전 API 게이트웨이 엔드포인트를 생성함. API Gateway 엔드포인트를 회사의 도메인 이름과 연결함. 회사의 도메인 이름과 연결된 공인 인증서를 동일한 리전의 AWS Certificate Manager(ACM)로 가져옴. API Gateway 엔드포인트에 인증서를 연결함. API Gateway 엔드포인트로 트래픽을 라우팅하도록 Route 53 을 구성함.**
+    
+    - 지역 API 게이트웨이 엔드포인트 생성
+        - 이를 통해 회사는 지역에 특정한 엔드포인트를 생성할 수 있음
+    - API 게이트웨이 엔드포인트를 회사의 도메인 이름과 연결
+        - 이렇게 하면 회사에서 API 게이트웨이 URL 에 자체 도메인 이름을 사용할 수 있음
+    - 회사의 도메인 이름과 연결된 공인 인증서를 동일한 리전의 AWS Certificate Manager(ACM)로 가져옴
+        - 이렇게 하면 회사에서 API 와의 보안 통신을 위해 HTTPS를 사용할 수 있음
+    - API Gateway 엔드포인트에 인증서 첨부
+        - 회사에서 API Gateway URL 보안을 위해 인증서를 사용할 수 있음
+    - 트래픽을 API 게이트웨이 엔드포인트로 라우팅하도록 Route 53 구성
+        - 이를 통해 회사는 Route 53을 사용하여 회사의 도메인 이름을 사용하는 API 게이트웨이 URL로 트래픽을 라우팅할 수 있음
+
+**Amazon Rekognition**
+- 회사에서 인기 있는 소셜 미디어 웹사이트를 운영하고 있음
+- 웹사이트는 사용자에게 이미지를 업로드하여 다른 사용자와 공유할 수 있는 기능을 제공함
+- 회사는 이미지에 부적절한 콘텐츠가 포함되지 않았는지 확인하고 싶음
+    
+    → **Amazon Rekognition을 사용하여 부적절한 콘텐츠를 감지함. 신뢰도가 낮은 예측에는 인적 검토를 사용함**
+    
+    - Amazon Rekognition을 사용하여 부적절하거나 원치 않거나 불쾌감을 주는 콘텐츠를 감지할 수 있음
+
+**Amazon Fargate, Amazon Elastic Container Service**
+- 회사는 확장성 및 가용성에 대한 요구 사항을 충족하기 위해 컨테이너에서 중요한 응용프로그램을 실행하려고 함
+- 회사는 중요한 응용 프로그램의 유지 관리에 집중하는 것을 선호함
+- 회사는 컨테이너화된 워크로드를 실행하는 기본 인프라의 프로비저닝 및 관리에 대한 책임을 원하지 않음
+    
+    → **AWS Fargate 에서 Amazon Elastic Container Service(Amazon ECS)를 사용함**
+    
+    - AWS에서 컨테이너라고 하면 ECS, ECS라고 하면 일단 Fargate부터 떠올리면 됨
+    - Amazon EC2 인스턴스의 서버나 클러스터를 관리할 필요 없이 컨테이너를 실행하기 위해 Amazon ECS에 사용할 수 있는 기술
+
+**Amazon Kinesis Data Streams, Amazon Kinesis Data Firehose, Amazon Redshift**
+- 회사는 300 개 이상의 글로벌 웹사이트 및 애플리케이션을 호스팅 함
+- 회사는 매일 30TB 이상의 클릭스트림 데이터를 분석할 플랫폼이 필요
+- 솔루션 설계자 클릭스트림 데이터를 전송하고 처리하기 위해 해야할 일
+    
+    → **Amazon Kinesis Data Streams 에서 데이터를 수집함. Amazon Kinesis Data Firehose를 사용하여 Amazon S3 데이터 레이크로 데이터를 전송함.  분석을 위해 Amazon Redshift 에 데이터를 로드함**
+    
+    - 대량의 스트림 데이터 수집 = Kinesis Data Streams
+    - Amazon Kinesis Firehose는 버퍼링된 데이터를 Amazon Kinesis Data Streams에서 Amazon Simple Storage Service (Amazon S3) 의 영구 
+    스토리지로 자동 이동함
+    - 분석 쿼리 및 복잡한 데이터 과학 작업을 위해 Amazon Redshift로 전송
+
+**AWS Application Load Balancer**
+- 회사에 AWS 에서 호스팅 되는 웹 사이트가 있음
+- 웹 사이트는 HTTP 와 HTTPS 를 별도로 처리하도록 구성된 ALB(Application Load Balancer) 뒤에 있음
+- 회사는 요청이 HTTPS 를 사용하도록 모든 요청을 웹사이트로 전달하려고 함
+    
+    → **ALB 에서 리스너 규칙을 생성하여 HTTP 트래픽을 HTTPS 로 리디렉션함**
+    
+    - 쿼리 문자열 조건을 사용하여 쿼리 문자열의 키/값 페어 또는 값을 기반으로 요청을 라우팅하는 규칙을 구성할 수 있음
+    - HTTP 요청을 HTTPS 로 리디렉션하는 HTTP 리스너 규칙 생성
+    - HTTPS 리스너 생성
+    - Application Load Balancer 의 보안 그룹이 443 의 트래픽을 허용하는지 확인
