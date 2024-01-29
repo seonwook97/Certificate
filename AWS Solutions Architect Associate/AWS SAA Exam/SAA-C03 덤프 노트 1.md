@@ -789,4 +789,4 @@
     - 쿼리 문자열 조건을 사용하여 쿼리 문자열의 키/값 페어 또는 값을 기반으로 요청을 라우팅하는 규칙을 구성할 수 있음
     - HTTP 요청을 HTTPS 로 리디렉션하는 HTTP 리스너 규칙 생성
     - HTTPS 리스너 생성
-    - Application Load Balancer 의 보안 그룹이 443 의 트래픽을 허용하는지 확인.
+    - Application Load Balancer 의 보안 그룹이 443 의 트래픽을 허용하는지 확인
