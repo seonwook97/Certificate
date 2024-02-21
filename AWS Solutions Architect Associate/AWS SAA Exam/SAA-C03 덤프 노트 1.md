@@ -929,3 +929,93 @@
     - Application Load Balancer 는 등록된 대상으로 요청을 주기적으로 전송하여 상태를 확인합니다.
     - 이러한 테스트를 바로 상태 확인이라고 합니다.
     - HTTP, HTTPS 등의 프로토콜이 여기에 해당됩니다. HTTP 프로토콜이 기본 설정값입니다.
+
+**Amazon Dynamo DB**
+- 회사는 Amazon DynamoDB 를 사용하여 고객 정보를 저장하는 쇼핑 애플리케이션을 실행합니다
+- 데이터 손상의 경우 솔루션 설계자는 15 분의 RPO(복구 시점 목표)와 1 시간의 RTO(복구 시간 목표)를 충족하는 솔루션을 설계해야 합니다
+    
+    → **DynamoDB 지정 시간 복구를 구성합니다. RPO 복구의 경우 원하는 시점으로 복원합니다**
+    
+    - DynamoDB 는 주문형 백업 기능을 제공합니다.
+    - 이를 통해 규정 준수 요구 사항에 대한 장기 보존 및 보관을 위해 테이블의 전체 백업을 생성할 수 있습니다.
+    - 주문형 백업을 생성하고 Amazon DynamoDB 테이블에 대한 특정 시점 복구를 활성화할 수 있습니다.
+    - 지정 시간 복구는 우발적인 쓰기 또는 삭제 작업으로부터 테이블을 보호하는 데 도움이 됩니다.
+    - 특정 시점 복구를 사용하면 지난 35 일 동안의 특정 시점으로 테이블을 복원할 수 있습니다.
+
+**AWS Transit Gateway**
+- 회사는 동일한 AWS 리전에 있는 Amazon S3 버킷에서 사진을 자주 업로드 및 다운로드해야 하는 사진 처리 애플리케이션을 실행합니다
+- 솔루션 설계자는 데이터 전송 비용이 증가한다는 사실을 알게 되었고 이러한 비용을 줄이기 위한 솔루션을 구현해야 합니다
+    
+    → **S3 VPC 게이트웨이 엔드포인트를 VPC 에 배포하고 S3 버킷에 대한 액세스를 허용하는 엔드포인트 정책을 연결합니다**
+    
+    - Transit Gateway 는 동일한 리전 내에 있는 여러 VPC 들을 연결하는 전송 '허브'이므로 Transit Gateway 를 거쳐 VPC 끼리 통신이 가능
+    - AWS Transit Gateway 는 동일한 리전의 VPC 를 상호 연결하여 Amazon VPC 라우팅 구성을 한 곳에 통합하는 네트워크 전송 허브입니다.
+    - S3 VPC 게이트웨이 엔드포인트를 배포하면 애플리케이션이 VPC 내의 프라이빗 네트워크 연결을 통해 S3 버킷에 액세스할 수 있으므로 인터넷을 통한 데이터 전송이 필요하지 않습니다.
+    - 이를 통해 데이터 전송 비용을 줄이고 애플리케이션의 성능을 향상시킬 수 있습니다.
+    - 엔드포인트 정책을 사용하여 애플리케이션이 액세스할 수 있는 S3 버킷을 지정할 수 있습니다.
+
+**AWS VPC Subnet, Bastion Host**
+- 회사는 최근 프라이빗 서브넷의 Amazon EC2 에서 Linux 기반 애플리케이션 인스턴스를 시작하고 VPC 의 퍼블릭 서브넷에 있는 Amazon EC2 인스턴스에서 Linux 기반 배스천 호스트를 시작했습니다
+- 솔루션 설계자는 사내 네트워크에서 회사의 인터넷 연결을 통해 배스천 호스트 및 애플리케이션 서버에 연결해야 합니다
+- 솔루션 설계자는 모든 EC2 인스턴스의 보안 그룹이 해당 액세스를 허용하는지 확인해야 합니다
+    
+    → **배스천 호스트의 현재 보안 그룹을 회사의 외부 IP 범위에서만 인바운드 액세스를 허용하는 보안 그룹으로 교체합니다
+        애플리케이션 인스턴스의 현재 보안 그룹을 배스천 호스트의 개인 IP 주소에서만 인바운드 SSH 액세스를 허용하는 보안 그룹으로 교체합니다**
+    
+    - 전체적인 프로세스는 사내 네트워크 -> 외부 인터넷 -> Bastion Host(퍼블릭서브넷 내에 NAT 게이트웨이와 함께 위치) -> Application(프라이빗서브넷 내에 위치)으로 이루어짐.
+    - Bastion Host 는 내부네트워크(여기서는 Application 이 있는 곳)에 접속할 수 있는 유일한 창구로, SSH 접속도 여길 통과해야만 가능함.
+
+**2 계층 웹 애플리케이션 보안 그룹 구성**
+- 솔루션 설계자는 2 계층 웹 애플리케이션을 설계하고 있습니다
+- 애플리케이션은 퍼블릭 서브넷의 Amazon EC2 에서 호스팅되는 퍼블릭 웹 티어로 구성됩니다
+- 데이터베이스 계층은 프라이빗 서브넷의 Amazon EC2 에서 실행되는 Microsoft SQL Server 로 구성됩니다
+- 보안은 회사의 최우선 과제입니다
+    
+    → **0.0.0.0/0 에서 포트 443 의 인바운드 트래픽을 허용하도록 웹 계층에 대한 보안 그룹을 구성합니다
+        웹 계층에 대한 보안 그룹에서 포트 1433 의 인바운드 트래픽을 허용하도록 데이터베이스 계층에 대한 보안 그룹을 구성합니다**
+    
+    - 전체적인 구조는 EC2 인스턴스에서 실행되는 웹 애플리케이션(퍼블릭 서브넷 내에 위치)---->EC2 인스턴스에서 실행되는 데이터베이스(프라이빗 서브넷 내에 위치)으로 되어있고, 인스턴스 단위의 보안은 보안 그룹이 담당.
+    - 보안 그룹은 기본적으로 인바운드 트래픽에 관해서는 허용만 지정할 수 있고, 허용하지 않은 건 기본적으로 모두 차단하기 때문에 외부 인터넷->웹 애플리케이션으로의 액세스를 허용하려면 0.0.0.0/0 으로부터 온 포트 443(HTTPS)를 허용해야 함.
+    - 그 다음으로 웹 애플리케이션->데이터베이스로의 액세스를 허용하려면 웹 애플리케이션이 있는 웹 계층에서 오는 포트 1433(MySQL) 인바운드 트래픽을 허용하도록 보안 그룹 설정을 해야 함.
+
+**Amazon API Gateway, AWS Lambda, Amazon Simple Queue Service**
+- 회사에서 애플리케이션의 성능을 개선하기 위해 다계층 애플리케이션을 온프레미스에서 AWS 클라우드로 이동하려고 합니다
+- 애플리케이션은 RESTful 서비스를 통해 서로 통신하는 애플리케이션 계층으로 구성됩니다
+- 한 계층이 오버로드되면 트랜잭션이 삭제됩니다
+- 솔루션 설계자는 이러한 문제를 해결하고 애플리케이션을 현대화하는 솔루션을 설계해야 합니다
+    
+    → **Amazon API Gateway 를 사용하고 애플리케이션 계층으로 AWS Lambda 함수에 트랜잭션을 전달합니다. Amazon Simple Queue Service(Amazon SQS)를 애플리케이션 서비스 간의 통신 계층으로 사용합니다**
+    
+    - AWS Lambda, Amazon API Gateway, AWS Amplify, Amazon DynamoDB 및 Amazon Cognito 를 사용하여 서버리스 웹 애플리케이션을 구축
+    - 이 예에서는 AWS Lambda, Amazon API Gateway, AWS Amplify, Amazon DynamoDB 및 Amazon Cognito 를 사용하여 서버리스 웹 애플리케이션 구축 질문과 유사한 설정을 보여줍니다.
+    - RESTful API = API Gateway 사용. 트랜잭션 삭제되는 문제 = SQS.
+
+**AWS Direct Connect, AWS DataSync**
+- 회사는 단일 공장에 있는 여러 기계에서 매일 10TB 의 계측 데이터를 수신합니다
+- 데이터는 공장 내에 위치한 온프레미스 데이터 센터의 SAN(Storage Area Network)에 저장된 JSON 파일로 구성됩니다
+- 회사는 이 데이터를 Amazon S3 로 전송하여 중요한 실시간에 가까운 분석을 제공하는 여러 추가 시스템에서 액세스할 수 있기를 원합니다.
+- 데이터가 민감한 것으로 간주되기 때문에 안전한 전송이 중요합니다
+- 가장 안정적인 데이터 전송을 제공하는 솔루션
+    
+    → **AWS Direct Connect 를 통한 AWS DataSync**
+    
+    - Direct Connect 는 전용선 연결로 온프레미스-AWS 간 통신하는 것이고, DataSync 는 데이터 전송/마이그레이션에 사용되는 서비스.
+    - AWS DataSync 는 온프레미스와 AWS 스토리지 서비스 사이에서 데이터 이동을 자동화 및 가속화하는 안전한 온라인 서비스입니다.
+    - Amazon Simple Storage Service(S3) 버킷 간에 데이터를 복사할 수 있습니다.
+
+**Amazon Kinesis Data Stream, Amazon API Gateway API Firehose, AWS Lambda, Amazon S3**
+- 회사는 애플리케이션에 대한 실시간 데이터 수집 아키텍처를 구성해야 합니다
+- 회사에는 데이터가 스트리밍될 때 데이터를 변환하는 프로세스인 API 와 데이터를 위한 스토리지 솔루션이 필요합니다
+    
+    → **Amazon Kinesis 데이터 스트림으로 데이터를 보내도록 Amazon API Gateway API 를 구성합니다. Kinesis 데이터 스트림을 데이터 원본으로 사용하는 Amazon Kinesis Data Firehose 전송 스트림을 생성합니다. AWS Lambda 함수를 사용하여 데이터를 변환합니다. Kinesis Data Firehose 전송 스트림을 사용하여 데이터를 Amazon S3 로 보냅니다**
+    
+    - API Gateway API 를 Kinesis Data Streams 와 같이 사용 가능
+        - API Gateway API를 Kinesis와 통합하려면 API Gateway와 Kinesis 서비스를 모두 사용할 수 있는 리전을 선택해야 합니다.
+    - Kinesis Data Streams 로 데이터 수집.
+        - Amazon Kinesis Data Streams 를 사용하면 특수 요구에 맞춰 스트리밍 데이터를 처리 또는 분석하는 사용자 지정 애플리케이션을 구축할 수 있습니다. 수십 만개의 소스에서 클릭스트림, 애플리케이션 로그, 소셜 미디어와 같은 다양한 유형의 데이터를 Kinesis 데이터 스트림에 추가할 수 있습니다.
+    - Kinesis Data Streams -> Kinesis Data Firehose
+        - Amazon Kinesis Data Firehose 전송 스트림에 정보를 전송하도록 Amazon Kinesis Data Streams 를 구성할 수 있습니다.
+    - Lambda 로 데이터 변환
+        - Kinesis Data Firehose Firehose 는 Lambda 함수를 호출하여 수신되는 소스 데이터를 변환하고 변환된 데이터를 대상으로 전송할 수 있음.
+    - S3 로 전송
+        - Amazon Kinesis Data Firehose 는 실시간 스트리밍 데이터를 Amazon S3, Amazon RedShift, Amazon OpenSearch Service, Splunk 및 사용자 지정 HTTP 엔드포인트 또는 Datadog, Dynatrace, LogicMonitor, MongoDB, New Relic, Sumo Logic 을 포함한 지원되는 서드파티 소유의 HTTP 엔드포인트 대상에 전달하기 위한 완전관리형 서비스입니다.
