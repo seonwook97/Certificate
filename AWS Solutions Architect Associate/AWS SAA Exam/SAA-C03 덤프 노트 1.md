@@ -1019,3 +1019,36 @@
         - Kinesis Data Firehose Firehose 는 Lambda 함수를 호출하여 수신되는 소스 데이터를 변환하고 변환된 데이터를 대상으로 전송할 수 있음.
     - S3 로 전송
         - Amazon Kinesis Data Firehose 는 실시간 스트리밍 데이터를 Amazon S3, Amazon RedShift, Amazon OpenSearch Service, Splunk 및 사용자 지정 HTTP 엔드포인트 또는 Datadog, Dynatrace, LogicMonitor, MongoDB, New Relic, Sumo Logic 을 포함한 지원되는 서드파티 소유의 HTTP 엔드포인트 대상에 전달하기 위한 완전관리형 서비스입니다.
+
+**AWS Backup**
+- 회사는 사용자 트랜잭션 데이터를 Amazon DynamoDB 테이블에 보관해야 합니다
+- 회사는 데이터를 7 년간 보관해야 합니다
+- 가장 운영 효율성이 높은 솔루션
+    
+    → **AWS Backup 을 사용하여 테이블에 대한 백업 일정 및 보존 정책을 생성합니다**
+    
+    - 한 곳에서 백업 현황 모니터링 및 콜드 스토리지에 저장, 예약 저장 가능합니다.
+    - AWS Backup 을 사용하면 백업 정책을 구성하고 AWS 리소스 및 온프레미스 워크로드에 대한 활동을 한 곳에서 모니터링할 수 있습니다.
+    - AWS Backup 과 함께 DynamoDB를 사용하면 AWS 계정 및 리전에서 온디맨드 백업을 복사하고, 온디맨드 백업에 비용 할당 태그를 추가하고, 
+    온디맨드 백업을 콜드 스토리지로 전환하여 비용을 절감할 수 있습니다.
+
+**AWS DynamoDB On-Demand**
+- 회사에서 데이터 저장을 위해 Amazon DynamoDB 테이블을 사용할 계획입니다
+- 회사는 비용 최적화에 대해 우려하고 있습니다
+- 대부분의 아침에는 테이블을 사용하지 않습니다
+- 저녁에는 읽기 및 쓰기 트래픽이 예측할 수 없는 경우가 많습니다
+- 트래픽 급증이 발생하면 매우 빠르게 발생합니다
+    
+    → **온디맨드 용량 모드에서 DynamoDB 테이블을 생성합니다**
+    
+    - 온디맨드 모드를 사용하는 테이블의 경우 DynamoDB 는 이전에 관찰된 트래픽 수준까지 상승하거나 하락할 때 고객의 워크로드를 즉시 수용할 수 있습니다.
+    - 트래픽 수준이 새로운 고점에 도달하면 DynamoDB 는 신속하게 대응하여 워크로드를 수용합니다.
+
+**Amazon AMI with MSP Partner**
+- 회사는 최근 애플리케이션 마이그레이션 이니셔티브에 대한 지원을 위해 AWS 관리형 서비스 공급자(MSP) 파트너와 계약을 체결했습니다
+- 솔루션 설계자는 기존 AWS 계정의 Amazon 머신 이미지(AMI)를 MSP 파트너의 AWS 계정과 공유해야 합니다
+- AMI 는 Amazon Elastic Block Store(Amazon EBS)의 지원을 받으며 AWS Key Management Service(AWS KMS) 고객 관리형 키를 사용하여 EBS 볼륨 스냅샷을 암호화합니다
+- MSP 파트너의 AWS 계정과 AMI 를 공유하는 가장 안전한 방법
+    
+    → **AMI 의 launchPermission 속성을 수정합니다. MSP 파트너의 AWS 계정과만 AMI 를 공유하십시오. MSP 파트너의 AWS 계정이 키를 사용할 수 
+    있도록 키 정책을 수정합니다**
