@@ -1187,7 +1187,7 @@
 - 회사에서 Amazon S3 버킷에 민감한 사용자 정보를 저장하고 있습니다
 - 회사는 VPC 내부의 Amazon EC2 인스턴스에서 실행되는 애플리케이션 계층에서 이 버킷에 대한 보안 액세스를 제공하려고 합니다
 
-    -> **VPC 내에어도 Amazon S3 및 DynamoDB 에 대한 안정적인 연결을 제공합니다. 게이트웨이 엔드포인트는 AWS PrivateLink 를 활성화하지 않습니다.
+    -> **VPC 내에어도 Amazon S3 및 DynamoDB 에 대한 안정적인 연결을 제공합니다. 게이트웨이 엔드포인트는 AWS PrivateLink 를 활성화하지 않습니다.**
     -  버킷 정책으로 버킷에 대한 액세스 제어. 버킷 정책은 버킷과 해당 버킷의 객체에 대한 액세스 권한을 부여할 수 있는 리소스 기반 정책입니다.
 
 **AWS 다중 AZ Aurora, Aurora MySQL**
@@ -1231,10 +1231,10 @@
 **AWS IAM 정책**
     ![image](https://github.com/seonwook97/Certificate/assets/92377162/f80e2c4e-6b93-4c7f-9ff6-a958da7a1587)
 
-    -> **사용자는 사용자의 소스 IP 가 10.100.100.254 일 때 us-east-1 리전에서 EC2 인스턴스를 종료할 수 있습니다.**
+-> **사용자는 사용자의 소스 IP 가 10.100.100.254 일 때 us-east-1 리전에서 EC2 인스턴스를 종료할 수 있습니다.**
 
-    - Allow 문 해석 : 소스 IP 가 10.100.100.0/24 인 모든 리소스(*)에 대해 ec2 인스턴스 종료를 허용
-    - Deny 문 해석 : ec2 리전이 us-east-1 이 아닌 모든 리소스(*)에 대해 ec2 의 모든 작업을 불허
+- Allow 문 해석 : 소스 IP 가 10.100.100.0/24 인 모든 리소스(*)에 대해 ec2 인스턴스 종료를 허용
+- Deny 문 해석 : ec2 리전이 us-east-1 이 아닌 모든 리소스(*)에 대해 ec2 의 모든 작업을 불허
 
 **AWS Windows 파일 서버용 Amazon FSx 파일 시스템, Active Directory Service**
 - 회사에는 Microsoft Windows 공유 파일 저장소가 필요한 온프레미스에서 실행되는 대규모 Microsoft SharePoint 배포가 있습니다. 
