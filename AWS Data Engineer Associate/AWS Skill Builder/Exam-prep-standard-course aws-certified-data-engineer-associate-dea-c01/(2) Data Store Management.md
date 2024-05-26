@@ -157,3 +157,81 @@
 ### 스토리지 비용 최적화
 - 여러 소스에서 수집된 대량의 CSV 형식 데이터를 Amazon S3 버킷에 저장하고, **Athena**를 사용하여 이 데이터를 쿼리하는 경우, 데이터를 압축, 파티셔닝 및 컬럼 형식으로 변환하여 저장 비용을 최적화할 수 있음
   - 6개월 후에 데이터를 S3 Standard-Infrequent Access로 전환하고, 2년 후에는 Amazon S3 Glacier로 전환할 수 있음
+
+---
+
+## 2-4. 데이터 모델 설계 및 스키마 진화
+
+### 데이터 모델링의 중요성
+- 데이터를 유용한 형태로 변환하여 비즈니스 인사이트 도출
+- 다양한 데이터 소스와 사용 사례에 맞는 모델링 적용 필요
+
+### AWS 데이터 모델링 지원
+- **Amazon Redshift**: **스타 스키마, 스노우플레이크 스키마** 지원
+  - `Star Schema`
+    - 단순한 데이터 모델로, 중앙에 하나의 팩트테이블과 이를 둘러싼 여러 디멘전테이블로 구성 
+    - 데이터 웨어하우스의 데이터를 구조화하는데 유용
+    - **Fact Table**: 트랜잭션 데이터나 측정값을 저장
+    - **Dimension Table**: 사실 테이블의 각 항목을 설명하는 메타데이터를 포함
+    - **설계 장점**: 단순하고 이해하기 쉬우며 쿼리가 빠름
+    - **사용 예시**: 판매 데이터 분석, 재고 관리 등
+  - `Snowflake Schema`
+    - 스타 스키마의 확장된 형태로, 차원 테이블이 더 작은 하위 차원 테이블로 정규화
+    - 데이터 중복을 줄이고 저장 공간을 절약
+    - **Category Dimension Table**: 각 차원 테이블이 하위 차원 테이블로 나뉘어 정규화됨
+    - **설계 장점**: 데이터 중복 감소, 저장 공간 절약
+    - **설계 단점**: 더 복잡한 쿼리, 조인 연산 증가로 성능 저하 가능성
+    - **사용 예시**: 대규모 데이터 웨어하우스, 복잡한 분석 요구 사항
+  - **Star Schema vs Snowflake Schema**
+    - **Star Schema**
+      - 단순하고 직관적이며 쿼리 성능이 뛰어남
+      - 데이터 중복이 있을 수 있음
+    - **Snowflake Schema**
+      - 정규화를 통해 데이터 중복을 줄이고 저장 공간을 절약
+      - 쿼리가 복잡하고 조인 연산이 많아질 수 있음
+  
+ > ![](https://velog.velcdn.com/images/seonwook97/post/46b55b52-baa1-4aff-a777-d453be1e5bbf/image.png)
+
+- Inmon 및 데이터 볼트 모델링 패턴 구현 가능
+- **Amazon Redshift Serverless**: 데이터 웨어하우스로 데이터를 가져와 쿼리, 스키마 및 테이블 생성, 데이터 시각화 및 탐색
+
+### 데이터 처리 프레임워크
+- **Spark**: **Amazon EMR, Amazon S3, AWS Glue**와 결합하여 대규모 데이터 처리 파이프라인 구축
+  - **Amazon EMR**: 온디맨드로 Spark 클러스터 실행, 데이터 병렬 처리 및 클러스터 확장
+  - **Amazon S3**: 데이터를 직접 Spark DataFrames 또는 RDD로 읽기
+  - **AWS Glue**: 데이터 크롤러로 Amazon S3의 구조화된 데이터 스키마 자동 추론 및 데이터 카탈로그에 테이블 생성
+
+### 데이터 정확성 및 신뢰성 확보
+- **데이터 계보(Data Lineage)**: 데이터의 원천, 변환 및 흐름 추적
+  - SageMaker ML Lineage Tracking: 기계 학습 관련 데이터 계보 추적
+
+### 인덱싱, 파티셔닝 전략, 압축 및 최적화
+- **Amazon RDS**: 자주 사용되는 컬럼에 인덱스 생성
+- **DynamoDB**: 효율적인 쿼리 패턴을 지원하는 기본 키 및 보조 인덱스 선택
+- **Amazon S3**: 대규모 데이터셋 파티셔닝
+- **Amazon Redshift**: 분포 키 및 정렬 키 사용
+- **압축**: gzip, bzip2 등 지원 압축 형식 사용
+- **데이터 아카이빙 및 보존 정책**: 비용 효율적인 스토리지 계층 사용(Amazon S3 Glacier 등)
+
+### 스키마 진화 기법
+- **DynamoDB**: 애플리케이션 업데이트를 통해 새로운 속성 또는 스키마 변경 적용
+- **Amazon RDS 및 Aurora**: AWS DMS 사용하여 최소 다운타임으로 스키마 변경 수행
+- **데이터 레이크**: 스키마 온 리드 접근 방식 사용
+- **AWS Glue**: 자동 ETL 작업을 통해 데이터 스키마 변환 관리
+
+### 스키마 진화 관련 문제 예방
+- **데드 레터 큐**: 스키마 진화 문제 해결을 위한 첫 번째 생각
+- **스키마 레지스트리**: 스키마 검증 및 버전 관리
+- **백업 및 모니터링**: 스키마 변경 전 백업 수행 및 모니터링 설정
+
+### 데이터 모델링 및 스키마 진화 최적화
+- **AWS SCT**: 데이터베이스 엔진 간 스키마 변환
+- **AWS DMS**: AWS SCT와 함께 소스 데이터베이스 스키마 변환 지원
+
+---
+
+## Reference
+- Exam Prep Standard Course: AWS Certified Data Engineer – Associate (DEA-C01)
+  - https://explore.skillbuilder.aws/learn/course/18546/play/106338/domain-2-data-store-management
+- Star Schema vs Snowflake Schema
+  - https://www.integrate.io/ko/blog/snowflake-schemas-vs-star-schemas-what-are-they-and-how-are-they-different-ko/
