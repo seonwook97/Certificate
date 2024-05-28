@@ -55,12 +55,12 @@
   - 이벤트 규칙 생성 및 이벤트 속성에 따라 이벤트 라우팅
   - CloudWatch와 통합하여 이벤트 모니터링 및 경고 설정
 
-### 예제: Step Functions를 사용한 데이터 파이프라인 오케스트레이션
-1. **Lambda 함수 생성**: 파일 확장자를 확인하여 파일 유형 결정
-2. **두 번째 Lambda 함수 생성**: 식별된 파일 유형에 따라 파일 처리
-3. **Amazon SNS 주제 생성**: 이메일 구독
-4. **Step Function 상태 머신 생성**: 두 Lambda 함수와 Amazon SNS 주제 통합
-5. **S3 버킷 CloudTrail 데이터 이벤트 설정**: S3 버킷이 CloudTrail 데이터 이벤트를 생성하도록 구성
-6. **EventBridge 규칙 생성**: Step Function 상태 머신을 시작하는 규칙 생성
+### Step Functions를 사용한 데이터 파이프라인 오케스트레이션
+- **Lambda 함수 생성**: 파일 확장자를 확인하여 파일 유형 결정
+- **두 번째 Lambda 함수 생성**: 식별된 파일 유형에 따라 파일 처리
+- **Amazon SNS 주제 생성**: 이메일 구독
+- **Step Function 상태 머신 생성**: 두 Lambda 함수와 Amazon SNS 주제 통합
+- **S3 버킷 CloudTrail 데이터 이벤트 설정**: S3 버킷이 CloudTrail 데이터 이벤트를 생성하도록 구성
+- **EventBridge 규칙 생성**: Step Function 상태 머신을 시작하는 규칙 생성
 
 ---
