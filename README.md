@@ -13,4 +13,4 @@
 
 | 자격명 | 참고자료 | 시작일자 | 종료일자 |
 | --- | --- | --- | --- |
-| Certified Kubernetes Administrator | [Certified Kubernetes Administrator (CKA) with Practice Tests](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/) | 2024-06-10 |  |
+| Certified Kubernetes Administrator | [Certified Kubernetes Administrator (CKA) with Practice Tests](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/) | 2024-06-13 |  |
