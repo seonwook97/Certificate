@@ -51,6 +51,7 @@
   - Cluster Architecture (클러스터 아키텍처)
   - API Primitives (API 기본 요소)
   - Services & Other Network Primitives (서비스 및 기타 네트워크 기본 요소)
+
 - **Scheduling (스케줄링)**
   - Labels & Selectors (라벨 및 셀렉터)
   - Daemon Sets (데몬셋)
@@ -59,20 +60,24 @@
   - Manual Scheduling (수동 스케줄링)
   - Scheduler Events (스케줄러 이벤트)
   - Configure Kubernetes Scheduler (Kubernetes 스케줄러 구성)
+
 - **Logging & Monitoring (로그 및 모니터링)**
   - Monitor Cluster Components (클러스터 구성 요소 모니터링)
   - Monitor Cluster Components Logs (클러스터 구성 요소 로그 모니터링)
   - Monitor Applications (애플리케이션 모니터링)
   - Application Logs (애플리케이션 로그)
+
 - **Application Lifecycle Management (애플리케이션 라이프사이클 관리)**
   - Rolling Updates and Rollbacks in Deployments (배포에서 롤링 업데이트 및 롤백)
   - Configuring Applications (애플리케이션 구성)
   - Scale Applications (애플리케이션 확장)
   - Self-Healing Applications (자가 치유 애플리케이션)
+
 - **Cluster Maintenance (클러스터 유지 보수)**
   - Cluster Upgrade Process (클러스터 업그레이드 프로세스)
   - Operating System Upgrades (운영 체제 업그레이드)
   - Backup and Restore Methodologies (백업 및 복원 방법론)
+
 - **Security (보안)**
   - Authentication & Authorization (인증 및 권한 부여)
   - Kubernetes Security (Kubernetes 보안)
@@ -82,12 +87,14 @@
   - Network Policies (네트워크 정책)
   - Security Contexts (보안 컨텍스트)
   - Secure Persistent Key Value Store (보안 지속적인 키-값 저장소)
+
 - **Storage (스토리지)**
   - Persistent Volumes (지속적인 볼륨)
   - Access Modes for Volumes (볼륨 액세스 모드)
   - Persistent Volume Claims (지속적인 볼륨 클레임)
   - Kubernetes Storage Object (Kubernetes 스토리지 객체)
   - Configure Applications with Persistent Storage (지속적인 스토리지로 애플리케이션 구성)
+
 - **Networking (네트워킹)**
   - Pre-Requisites - Network, Switching, Routing, Tools (사전 요구 사항 - 네트워크, 스위칭, 라우팅, 도구)
   - Pre-Requisites - Network Namespaces (사전 요구 사항 - 네트워크 네임스페이스)
@@ -99,6 +106,7 @@
   - Ingress (인그레스)
   - Cluster DNS (클러스터 DNS)
   - CNI
+
 - **Installation, Configuration & Validation (설치, 구성 및 유효성 검사)**
   - Design a Kubernetes Cluster (Kubernetes 클러스터 설계)
   - Install Kubernetes Master and Nodes (Kubernetes 마스터 및 노드 설치)
@@ -110,6 +118,7 @@
   - Kubernetes Infrastructure Config (Kubernetes 인프라 구성)
   - Run & Analyze end-to-end test (end-to-end 테스트 실행 및 분석)
   - Node end-to-end tests (노드 end-to-end 테스트)
+  
 - **Troubleshooting (문제 해결)**
   - Application Failure (애플리케이션 실패)
   - Control Plane Failure (제어 평면 실패)
