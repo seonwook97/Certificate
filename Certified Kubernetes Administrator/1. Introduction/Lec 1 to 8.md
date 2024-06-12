@@ -5,7 +5,7 @@
 
 ---
 
-### CKA Curriculum
+### CKA 시험 커리큘럼
 - **25% - Cluster Architecture, Installation, and Configuration (클러스터 아키텍처, 설치 및 구성)** 
   - Managing Role-Based Access Control (RBAC) (역할 기반 액세스 제어 (RBAC) 관리)
   - Installing the base cluster using Kubeadm (Kubeadm을 사용하여 기본 클러스터 설치)
@@ -46,7 +46,7 @@
 
 ---
 
-### CKA kodekloud Course Objectives (CKA kodekloud 강의 목표)
+### CKA kodekloud 강의 목표
 - **Core Concepts (핵심 개념)**
   - Cluster Architecture (클러스터 아키텍처)
   - API Primitives (API 기본 요소)
@@ -73,7 +73,7 @@
   - Cluster Upgrade Process (클러스터 업그레이드 프로세스)
   - Operating System Upgrades (운영 체제 업그레이드)
   - Backup and Restore Methodologies (백업 및 복원 방법론)
- - **Security (보안)**
+- **Security (보안)**
   - Authentication & Authorization (인증 및 권한 부여)
   - Kubernetes Security (Kubernetes 보안)
   - Network Policies (네트워크 정책)
