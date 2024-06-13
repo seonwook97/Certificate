@@ -30,7 +30,7 @@
 - 클러스터 내의 모든 작업을 조정함. Kubernetes API를 노출하여 외부 사용자가 클러스터를 관리할 수 있게 함
 
 #### 컨테이너 런타임 (Container Runtime)
-- 컨테이너를 실행할 수 있는 소프트웨어임. Docker, containerd 등이 이에 해당함
+- 컨테이너를 실행할 수 있는 소프트웨어임. Docker, containerD 등이 이에 해당함
 
 #### kubelet
 - 각 노드에서 실행되는 에이전트로, Kube API 서버의 지시에 따라 컨테이너를 배포하거나 파괴함
