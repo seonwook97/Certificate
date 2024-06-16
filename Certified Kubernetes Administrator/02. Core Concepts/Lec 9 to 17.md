@@ -37,3 +37,53 @@
 
 #### Kube 프록시 (Kube Proxy)
 - 작업자 노드 간의 네트워킹을 관리하여 클러스터 내 서비스 간의 통신을 가능하게 함
+
+---
+
+### Docker vs ContainerD: 상세 비교
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/560ac0d3-3939-4302-97a3-b4074b4f2fa3)
+
+#### Docker의 시작
+
+- 컨테이너 기술의 초창기에는 Docker가 가장 지배적인 도구였음
+- Docker는 사용자가 컨테이너 작업을 매우 간단하게 할 수 있게 해줬고, 이로 인해 널리 사용되었음
+- Kubernetes는 처음에 Docker를 조율하기 위해 만들어졌음
+
+#### Kubernetes와 CRI
+
+- Kubernetes가 인기를 얻으면서 rkt와 같은 다른 컨테이너 런타임도 필요하게 됨
+- 이를 해결하기 위해 Kubernetes는 컨테이너 런타임 인터페이스(CRI)를 도입하여 다양한 런타임이 Kubernetes와 호환될 수 있도록 함
+- CRI는 OCI(Open Container Initiative) 표준을 준수하는 모든 런타임을 지원함.
+
+#### OCI 표준
+
+- OCI는 이미지 사양과 런타임 사양을 정의함
+  - **Imagespec**: 컨테이너 이미지를 어떻게 구축해야 하는지 
+  - **Runtimespec**: 컨테이너 런타임을 어떻게 개발해야 하는지 
+
+#### Docker와 dockershim
+
+- Docker는 CRI 표준을 지원하지 않았기 때문에 Kubernetes는 Docker를 지원하기 위해 dockershim을 도입했음
+- 이는 일시적인 해결책으로, Docker를 계속 사용하기 위해 복잡함과 추가 노력이 필요했음
+- Kubernetes 1.24 버전부터 dockershim이 완전히 제거되어 Docker에 대한 지원이 종료됨
+
+#### Containerd의 등장
+
+- ContainerD는 Docker의 일부였으나, 현재는 독립된 프로젝트로 CRI와 호환됨
+- ContainerD는 Docker와 별개로 설치 및 사용할 수 있음
+- 이는 Docker가 아닌 다른 런타임을 사용할 수 있게 함
+
+#### CLI 도구들
+
+**ctr**
+- ContainerD와 함께 제공되는 기본 CLI 도구로, 주로 디버깅 목적으로 사용됨
+- 기능이 제한적이며, 프로덕션 환경에서는 사용하기 어려움
+
+**nerdctl**
+- Docker CLI와 유사한 도구로, ContainerD와 함께 사용하기에 적합함
+- 대부분의 Docker 명령을 지원하며, 최신 ContainerD 기능에도 접근할 수 있음
+
+**crictl**
+- Kubernetes 커뮤니티에서 제공하는 도구로, 모든 CRI 호환 런타임과 상호작용할 수 있음
+- 주로 디버깅 목적으로 사용됨
