@@ -87,3 +87,62 @@
 **crictl**
 - Kubernetes 커뮤니티에서 제공하는 도구로, 모든 CRI 호환 런타임과 상호작용할 수 있음
 - 주로 디버깅 목적으로 사용됨
+
+---
+
+### ETCD
+- ETCD는 분산되고 신뢰할 수 있는 키-값 저장소로, 간단하고 안전하며 빠른 성능을 자랑함
+- Kubernetes의 중요한 구성 요소로서 클러스터의 상태와 설정 정보를 저장함
+
+#### key-value store (키-값 저장소)
+![image](https://github.com/seonwook97/Certificate/assets/92377162/7653301f-1eaa-4c0a-a496-3f1f51bbd583)
+![image](https://github.com/seonwook97/Certificate/assets/92377162/0af2e48a-45b1-4537-98e7-1c5d34996abb)
+- 전통적인 데이터베이스는 데이터를 표 형식으로 저장하는 반면, 키-값 저장소는 데이터를 문서나 페이지 형태로 저장함 
+- 각 개인은 문서를 가지고 있으며, 해당 문서에 개인과 관련된 모든 정보가 저장됨
+- 이 방식은 데이터 구조에 유연성을 제공하고, 필요에 따라 데이터를 쉽게 확장하거나 수정할 수 있게 함
+
+#### 설치 및 실행
+- 운영 체제에 맞는 바이너리를 GitHub 릴리스 페이지에서 다운로드
+- 다운로드한 파일을 추출하고, `etcd` 실행 파일을 실행
+  ```shell
+  # 바이너리 다운로드
+  curl -L https://github.com/etcd-io/etcd/releases/download/v3.3.11/etcdv3.3.11-linux-amd64.tar.gz -o etcd-v3.3.11-linux-amd64.tar.gz
+
+  # 압축풀기
+  tar xzvf etcd-v3.3.11-linux-amd64.tar.gz
+
+  # etcd 실행
+  ./etcd
+  ```
+- ETCD를 실행하면 기본적으로 포트 2379에서 수신 대기하는 서비스가 시작됨
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/c10cb9e6-8aa1-4a21-a4b4-41df2778a3c7)
+- 이후 클라이언트를 통해 ETCD 서비스에 연결하고 데이터를 저장하고 검색할 수 있음
+
+#### ETCDCTL 클라이언트
+- ETCDCTL은 ETCD와 함께 제공되는 명령줄 클라이언트로, 키-값 쌍을 저장하고 검색하는 데 사용됨
+- **데이터 저장**: `./etcdctl set key1 value1`
+- **데이터 검색**: `./etcdctl get key1`
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/be5d63e6-13a8-4e26-9dc7-4f64fab87f94)
+
+#### ETCD 버전 및 API
+- **v0.1**: 2013년 8월 출시
+- **v2.0**: 2015년 2월 출시, RAFT 합의 알고리즘 재설계
+- **v3.0**: 2017년 1월 출시, 최적화 및 성능 개선
+- **CNCF 인큐베이션**: 2018년 11월
+- v2.0과 v3.0 사이에는 API 버전의 변화가 있었음. ETCDCTL 명령도 이에 맞춰 변경되었음
+
+#### ETCDCTL 버전 확인 및 설정
+- **버전 확인**: `ETCDCTL_API` 환경 변수를 통해 API 버전을 설정하거나, `etcdctl version` 명령을 통해 확인할 수 있음
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/b49736ab-863b-4fbb-91d7-0a880c610094)
+- **API v3.0 사용**: `ETCDCTL_API=3` 환경 변수를 설정하여 v3.0 API와 함께 작동하도록 함
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/650ec0c5-5b52-48cc-a76a-ab3deac0c526)
+
+#### v3.0 명령어
+- **값 설정**: `./etcdctl put key value`
+- **값 가져오기**: `./etcdctl get key`
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/00b68f07-7996-4d3d-bd65-88bf934d5305)
+
+#### 고가용성 및 분산 시스템
+- ETCD는 분산 시스템으로 설계되어 있으며, 고가용성을 위해 클러스터 모드에서 작동할 수 있음
+- 이 과정에서 RAFT 프로토콜을 사용하여 노드 간의 일관성을 유지함
+
