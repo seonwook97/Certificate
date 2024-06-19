@@ -183,3 +183,12 @@
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/63490486-7230-4b00-9166-71e2bec4c1be)
   - etcd 데이터베이스를 탐색하려면 이 포드 내에서 etcdctl 유틸리티를 사용할 수 있음
   - Kubernetes에 저장된 모든 키를 나열하려면 다음 명령을 실행
+
+#### etcdctl 유틸리티에 대한 추가 정보
+- etcdctl이 etcd API 서버에 인증할 수 있도록 인증서 파일의 경로 지정
+- 인증서 파일은 다음 경로의 etcd - master에서 사용할 수 있음
+  ```Shell
+  kubectl exec etcd - master - n kube - system -- sh - c "ETCDCTL_API=3 etcdctl get / --prefix --keys-only --limit=10 --cacert /etc kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt --key /etc/kubernetes/pki/etcd/server.key" 
+  ```
+
+---
