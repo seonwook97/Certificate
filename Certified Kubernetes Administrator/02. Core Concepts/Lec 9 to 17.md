@@ -146,3 +146,39 @@
 - ETCD는 분산 시스템으로 설계되어 있으며, 고가용성을 위해 클러스터 모드에서 작동할 수 있음
 - 이 과정에서 RAFT 프로토콜을 사용하여 노드 간의 일관성을 유지함
 
+#### etcd의 역할
+- Kubernetes에서 etcd는 클러스터에 관한 모든 정보를 저장하는 중앙 데이터 저장소 역할
+  - Nodes
+  - PODs
+  - Configs
+  - Secrets
+  - Accounts
+  - Roles
+  - Bindings
+  - Others
+
+#### etcd 배포 방법
+- 클러스터를 설정하는 방법에 따라 etcd는 다르게 배포될 수 있음
+- **Manual**
+  ```Shell
+  wget -q --https-only \"https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+  ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/338830ad-7c11-453a-8189-6e64289ba737)
+  - etcd 바이너리를 직접 다운로드
+  - 바이너리 설치 및 etcd 구성
+  - 마스터 노드에서 etcd를 서비스로 실행
+  - `advertise-client-urls`
+    - etcd가 수신하는 주소로, 서버의 IP와 포트 2379를 포함
+    - kube API 서버가 etcd 서버에 접근하려면 이 URL을 구성해야 함
+- **kubeadm**
+  ```Shell
+  kubectl get pods -n kube-system
+  ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/c677d3e3-71cb-4017-bcdc-d39b36ccd1b3)
+  - kubeadm을 사용하여 클러스터를 설정하는 경우, kubeadm은 etcd 서버를 포드로 배포
+  - 이 포드는 `kube-system` 네임스페이스에 위치
+  ```Shell
+  kubectl exec etcd-master –n kube-system etcdctl get / --prefix –keys-only
+  ```
+  - etcd 데이터베이스를 탐색하려면 이 포드 내에서 etcdctl 유틸리티를 사용할 수 있음
+  - Kubernetes에 저장된 모든 키를 나열하려면 다음 명령을 실행
