@@ -180,5 +180,6 @@
   ```Shell
   kubectl exec etcd-master –n kube-system etcdctl get / --prefix –keys-only
   ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/63490486-7230-4b00-9166-71e2bec4c1be)
   - etcd 데이터베이스를 탐색하려면 이 포드 내에서 etcdctl 유틸리티를 사용할 수 있음
   - Kubernetes에 저장된 모든 키를 나열하려면 다음 명령을 실행
