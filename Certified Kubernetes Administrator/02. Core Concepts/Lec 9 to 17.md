@@ -198,13 +198,16 @@
 - `kubectl` 명령을 실행하면 `kubectl` 유틸리티는 kube-apiserver에 요청을 보냄
 
 #### Kube-api Server 요청 처리 과정
-![image](https://github.com/seonwook97/Certificate/assets/92377162/effe2ea2-8e21-40a9-a8f1-b68dcd8966ec)
+![image](https://github.com/seonwook97/Certificate/assets/92377162/b47fe2bd-d9e8-4302-8b02-a805c74f6438)
 - `kubectl` 명령을 통해 요청이 kube-apiserver에 도달
 - kube-apiserver는 요청을 인증하고 검증
 - etcd 클러스터에서 데이터를 검색하여 응답
 
-
-
+![image](https://github.com/seonwook97/Certificate/assets/92377162/3384cc33-0bc5-45c1-84d5-3330f9c07123)
+- 포드를 생성하는 POST 요청을 보내면, 요청이 인증되고 유효성이 검사
+- API 서버는 etcd 서버의 정보를 업데이트 함
+- Scheduler는 새로운 포드가 생성되었음을 인식하고, 올바른 노드에 포드를 할당
+- 이 정보는 kube-apiserver를 통해 etcd 클러스터에 업데이트
 
 #### Kube-api Server 배포
 - kubeadmin 도구를 사용하여 클러스터를 부트스트랩한 경우, kube-apiserver는 자동으로 설정
