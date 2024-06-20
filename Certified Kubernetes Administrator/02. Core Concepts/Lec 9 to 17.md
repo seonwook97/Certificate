@@ -192,3 +192,19 @@
   ```
 
 ---
+
+### Kube-api Server
+- Kubernetes의 기본 관리 구성 요소
+- `kubectl` 명령을 실행하면 `kubectl` 유틸리티는 kube-apiserver에 요청을 보냄
+
+#### Kube-api Server 요청 처리 과정
+![image](https://github.com/seonwook97/Certificate/assets/92377162/effe2ea2-8e21-40a9-a8f1-b68dcd8966ec)
+- `kubectl` 명령을 통해 요청이 kube-apiserver에 도달
+- kube-apiserver는 요청을 인증하고 검증
+- etcd 클러스터에서 데이터를 검색하여 응답
+
+
+
+
+#### Kube-api Server 배포
+- kubeadmin 도구를 사용하여 클러스터를 부트스트랩한 경우, kube-apiserver는 자동으로 설정
