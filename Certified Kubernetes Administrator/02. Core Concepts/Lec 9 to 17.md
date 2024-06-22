@@ -230,5 +230,6 @@
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/02347665-9d54-42ba-91a5-a7a781fdf945)
   - `/etc/systemd/system/kube-apiserver.service`에서 서비스를 확인할 수 있음
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/ba813d99-5215-4f81-92e7-237d221ce501)
-  - 실행 중인 프로세스를 나열하여 현재 옵션을 확인할 수도 있음
-    
+  - 서비스를 보면서 옵션을 검사할 수 있음
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/a356b835-649a-4b7a-abca-2bc6e494c24e)
+  - 프로세스를 마스터노드에 나열하고 `kube-apiserver`를 검색하면 프로세스 실행과 효과적인 옵션을 볼 수 있음
