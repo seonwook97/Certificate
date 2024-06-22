@@ -295,7 +295,6 @@ curl -X POST /api/v1/namesapces/default/pods ...[other]
     ![image](https://github.com/seonwook97/Certificate/assets/92377162/3ca04e3b-ba23-4085-8de8-a973156fed60)
     - Kubernetes 릴리스 페이지에서 Kube Controller Manager 바이너리를 다운로드함
   - **추출 및 실행**
-    ![image](https://github.com/seonwook97/Certificate/assets/92377162/d24e1089-d9fa-4a21-b6b1-e240bbb102dd)
     - 바이너리를 추출하고 서비스로 실행함
       - 컨트롤러 중 일부가 작동하지 않거나 존재하지 않음
 
