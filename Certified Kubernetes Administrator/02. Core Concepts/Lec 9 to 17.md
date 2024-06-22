@@ -198,11 +198,17 @@
 - `kubectl` 명령을 실행하면 `kubectl` 유틸리티는 kube-apiserver에 요청을 보냄
 
 #### Kube-api Server 요청 처리 과정
+```Shell
+kubectl get nodes
+```
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/b47fe2bd-d9e8-4302-8b02-a805c74f6438)
 - `kubectl` 명령을 통해 요청이 kube-apiserver에 도달
 - kube-apiserver는 요청을 인증하고 검증
 - etcd 클러스터에서 데이터를 검색하여 응답
 
+```Shell
+curl -X POST /api/v1/namesapces/default/pods ...[other]
+```
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/3384cc33-0bc5-45c1-84d5-3330f9c07123)
 - 포드를 생성하는 POST 요청을 보내면, 요청이 인증되고 유효성이 검사
 - API 서버는 etcd 서버의 정보를 업데이트 함
@@ -214,6 +220,9 @@
 #### Kube-api Server 배포
 - kubeadmin 도구를 사용하여 클러스터를 부트스트랩한 경우, kube-apiserver는 자동으로 설정
 - 수동 설정
+  ```Shell
+  - wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-apiserver
+  ```
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/4f0bedca-298a-4836-a3dd-d44f1e081da1)
   - Kubernetes 릴리스 페이지에서 kube-apiserver 바이너리를 다운로드
   - 바이너리를 설치하고 서비스로 실행되도록 구성
@@ -222,15 +231,100 @@
 
 #### Kube-api Server 옵션 보기
 - kubeadmin을 사용하여 설정한 경우
+  ```Shell
+  kubectl get pods -n kube-system
+  ```
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/5ba839b8-6a51-4393-914d-2ae6dd419dcd)
   - `kube-system` 네임스페이스에 Pod로 배포됨
   - 포드 정의 파일은 `/etc/kubernetes/manifest` 폴더에 있음
 
 - kubeadmin을 사용하지 않고 설정한 경우
-  - `/etc/systemd/system/kube-apiserver.service`에서 서비스를 확인할 수 있음
+  ```Shell
+  cat /etc/kubernetes/manifests/kube-apiserver.yaml
+  ```
+  - 위치한 kube-apiserver 서비스를 확인하여 옵션을 검사할 수 있음
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/02347665-9d54-42ba-91a5-a7a781fdf945)
-  - 서비스를 보면서 옵션을 검사할 수 있음
+  ```Shell
+  cat /etc/systemd/system/kube-apiserver.service
+  ```
+  - `/etc/systemd/system/kube-apiserver.service`에서 실행중인 서비스를 확인할 수 있음
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/ba813d99-5215-4f81-92e7-237d221ce501)
+  ```Shell
+  ps -aux | grep kube-apiserver
+  ```
   - 프로세스를 마스터노드에 나열하고 `kube-apiserver`를 검색하면 프로세스 실행과 효과적인 옵션을 볼 수 있음
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/a356b835-649a-4b7a-abca-2bc6e494c24e)
   
+---
+
+### Kube Controller Manager
+
+#### Kube Controller Manager의 역할
+- Kube Controller Manager는 Kubernetes에서 다양한 컨트롤러를 관리함
+- 컨트롤러는 Kubernetes 시스템의 다양한 구성 요소의 상태를 지속적으로 모니터링
+- 전체 시스템을 원하는 상태로 유지하기 위해 필요한 조치를 취함
+
+#### Controller
+- **노드 컨트롤러 (Node Controller)**
+  ```Shell
+  kubectl get nodes
+  ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/6471252a-789d-4039-8981-2a9917f2d0e8)
+  - 노드의 상태를 모니터링
+  - 5초마다 노드의 상태를 점검하여, 노드가 연결되지 않은 상태로 40초 동안 유지되면 해당 노드를 연결할 수 없다고 표시
+  - 노드가 연결되지 않은 상태로 5분이 지나면 해당 노드에 할당된 POD를 제거하고, POD가 복제본 세트의 일부인 경우 다른 건강한 노드에 POD를 재프로비저닝함
+
+- **복제 컨트롤러 (Replication Controller)**
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/6cf93d4d-e39e-4347-b894-47d3378a64ed)
+  - 복제 세트 내에서 항상 원하는 수의 POD가 실행 중인지 확인함
+  - POD가 종료되면 새로운 POD를 생성함
+
+- **기타 컨트롤러**
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/bd921ea4-8d8f-4e7b-b0d4-e2bf0d62e412)
+  - 다양한 Kubernetes 리소스를 관리하는 많은 다른 컨트롤러가 있음
+    - Deployment(배포), Service-Account(서비스), Namespace(네임스페이스), Persistent Volume(영구 볼륨) 등
+  - 각 컨트롤러는 시스템의 특정 부분을 담당하며, 클러스터의 상태를 원하는 상태로 유지하기 위해 협력함
+
+#### Kube Controller Manager의 설치 및 구성
+- Kube Controller Manager는 여러 컨트롤러를 단일 프로세스로 패키징한 것
+- 설치
+  - **Kube Controller Manager 다운로드**
+    ```Shell
+    wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-controller-manager
+    ```
+    ![image](https://github.com/seonwook97/Certificate/assets/92377162/3ca04e3b-ba23-4085-8de8-a973156fed60)
+    - Kubernetes 릴리스 페이지에서 Kube Controller Manager 바이너리를 다운로드함
+  - **추출 및 실행**
+    ![image](https://github.com/seonwook97/Certificate/assets/92377162/d24e1089-d9fa-4a21-b6b1-e240bbb102dd)
+    - 바이너리를 추출하고 서비스로 실행함
+      - 컨트롤러 중 일부가 작동하지 않거나 존재하지 않음
+
+#### 옵션 설정
+- **Kube Controller Manager를 실행할 때 많은 옵션을 설정할 수 있음**
+  - **노드 감시 기간, 유예 기간 및 퇴거 시간 초과**와 같은 노드 컨트롤러의 설정
+  - **활성화할 컨트롤러**를 지정하는 옵션
+  - 기본적으로 모든 컨트롤러가 활성화되어 있지만, 필요에 따라 특정 컨트롤러만 활성화할 수도 있음
+- Kube 관리자가 Kube Controller Manager를 배표
+- 마스터 노드의 kube-system NAMESPACE에 POD로 저장됨
+  ```Shell
+  kubectl get pods -n kube-system
+  ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/d671dfd0-85e3-4fa6-a87b-cc7ab08dbf8f)
+
+- **Kube 관리자가 아닌 설정에서는 옵션을 검사할 수 있음**
+  ```Shell
+  cat /etc/kubernetes/manifests/kube-controller-manager.yaml
+  ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/57d23cee-38f1-423f-8446-852d0e2aa08b)
+
+- **Kube Controller Manager 서비스를 확인하여 실행중인 프로세스를 볼 수 있음**
+  ```Shell
+  cat /etc/systemd/system/kube-controller-manager.service
+  ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/7e212d12-8e3e-4ed0-8d18-65c9f620d6ae)
+
+- **마스터 노드에 실행중인 프로세스를 나열하여 Kube Controller Manager 옵션 확인**
+  ```Shell
+  ps -aux | grep kube-controller-manager
+  ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/c961bd1b-12ae-4753-849c-095c94836e00)
