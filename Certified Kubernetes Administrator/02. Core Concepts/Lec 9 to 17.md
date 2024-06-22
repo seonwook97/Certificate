@@ -208,6 +208,27 @@
 - API 서버는 etcd 서버의 정보를 업데이트 함
 - Scheduler는 새로운 포드가 생성되었음을 인식하고, 올바른 노드에 포드를 할당
 - 이 정보는 kube-apiserver를 통해 etcd 클러스터에 업데이트
+- kube-apiserver는 클러스터의 다양한 작업을 중앙에서 관리함
+- Scheduler, kube-controller-manager, kubelet 모두 kube-apiserver를 통해 클러스터를 업데이트
 
 #### Kube-api Server 배포
 - kubeadmin 도구를 사용하여 클러스터를 부트스트랩한 경우, kube-apiserver는 자동으로 설정
+- 수동 설정
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/4f0bedca-298a-4836-a3dd-d44f1e081da1)
+  - Kubernetes 릴리스 페이지에서 kube-apiserver 바이너리를 다운로드
+  - 바이너리를 설치하고 서비스로 실행되도록 구성
+  - kube-apiserver는 많은 매개변수를 사용하여 실행됨 
+  - 주요 매개변수 중 하나는 etcd 서버의 위치를 지정하는 것
+
+#### Kube-api Server 옵션 보기
+- kubeadmin을 사용하여 설정한 경우
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/5ba839b8-6a51-4393-914d-2ae6dd419dcd)
+  - `kube-system` 네임스페이스에 Pod로 배포됨
+  - 포드 정의 파일은 `/etc/kubernetes/manifest` 폴더에 있음
+
+- kubeadmin을 사용하지 않고 설정한 경우
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/02347665-9d54-42ba-91a5-a7a781fdf945)
+  - `/etc/systemd/system/kube-apiserver.service`에서 서비스를 확인할 수 있음
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/ba813d99-5215-4f81-92e7-237d221ce501)
+  - 실행 중인 프로세스를 나열하여 현재 옵션을 확인할 수도 있음
+    
