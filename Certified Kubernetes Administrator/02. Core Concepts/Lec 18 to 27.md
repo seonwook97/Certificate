@@ -54,7 +54,7 @@ wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux
 ```
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/d90de9e7-01e9-405f-9a32-3ef7d0007f3b)
   - kubeadm 지원 X. kubelet은 항상 수동으로 설치해야 함
-  - kubelet을 서비스로 실행함 실행 중인 kubelet 프로세스를 확인할 수 있습니다.
+  - kubelet을 서비스로 실행함 실행 중인 kubelet 프로세스를 확인할 수 있음
 
 #### kubelet 구성
 ```Shell
@@ -68,4 +68,46 @@ ps -aux | grep kubelet
 
 ---
 
+### kube-proxy
 
+#### kube-proxy의 역할
+- Kubernetes 클러스터 내에서 모든 Pod는 서로에게 접근할 수 있음
+- 이를 위해 클러스터에 Pod 네트워크 솔루션이 배포됨
+- Pod 네트워크는 클러스터 내 모든 노드에 걸쳐 있는 내부 가상 네트워크로, 모든 Pod가 이 네트워크에 연결됨
+
+#### Pod 네트워크와 서비스
+- 첫 번째 노드에 웹 애플리케이션이 배포되고 두 번째 노드에 데이터베이스 애플리케이션이 배포된 경우
+  - 웹 애플리케이션은 단순히 Pod의 IP를 사용하여 데이터베이스에 접근할 수 있음
+  - 그러나 데이터베이스 Pod의 IP가 항상 동일하게 유지된다는 보장은 없음
+  - 따라서 웹 애플리케이션이 데이터베이스에 접근하는 더 나은 방법은 서비스를 사용하는 것
+- 서비스는 클러스터 전체에서 데이터베이스 애플리케이션을 노출함
+- 웹 애플리케이션은 서비스 이름인 `DB`를 사용하여 데이터베이스에 접근할 수 있음 
+  - 서비스는 IP 주소도 할당받음
+- Pod가 서비스의 IP 또는 이름을 사용하여 서비스에 접근하려고 할 때, 트래픽은 백엔드 Pod, 이 경우에는 데이터베이스로 전달됨
+
+#### kube-proxy의 역할
+- 서비스는 실제 컨테이너가 아니므로 Pod 네트워크에 참여할 수 없음
+- 서비스는 Kubernetes 메모리에만 존재하는 가상 구성 요소
+- 그러나 서비스는 클러스터의 모든 노드에서 접근 가능해야 하며 이를 가능하게 하는 것이 **kube-proxy**
+- **kube-proxy**는 Kubernetes 클러스터의 각 노드에서 실행되는 프로세스임
+- kube-proxy는 새로운 서비스가 생성될 때마다 해당 서비스로의 트래픽을 백엔드 Pod로 전달하는 적절한 규칙을 각 노드에 생성함
+  - 이는 iptables 규칙을 사용하여 수행됨 
+  - 서비스의 IP가 10.96.0.12이고 실제 Pod의 IP가 10.32.0.15인 경우, **kube-proxy**는 클러스터의 각 노드에 트래픽을 서비스 IP에서 실제 Pod IP로 전달하는 iptables 규칙을 생성함
+
+#### kube-proxy 설치
+```Shell
+wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-proxy
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/f7914418-60a6-44e2-9ac5-0844d834531c)
+- Kubernetes 릴리스 페이지에서 kube-proxy 바이너리를 다운, 압축 해제 후 서비스 실행
+
+```Shell
+kubectl get pods -n kube-system
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/e7770e12-e264-4c13-b041-19a470c59aba)
+- kubeadm 도구는 각 노드에 Pod로 kube-proxy를 배포함 
+```Shell
+kubectl get daemonset -n kube-system
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/155fe4ad-0c7e-4175-988b-972ccd59dc0f)
+- 사실은 DaemonSet으로 배포되며, 클러스터의 각 노드에 항상 하나의 Pod가 배포됨
