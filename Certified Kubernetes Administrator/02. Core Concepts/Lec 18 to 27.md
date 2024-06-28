@@ -36,3 +36,36 @@ ps -aux | grep kube-scheduler
 ```
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/85b3f6ce-f293-483d-9ab7-ede27888904c)
 - 프로세스를 마스터 노드에 나열하고 kube-scheduler를 검색하여 프로세스 실행과 효과적인 옵션을 볼 수 있음 
+
+---
+
+### kubelet 
+
+#### kubelet의 역할
+![image](https://github.com/seonwook97/Certificate/assets/92377162/889cbaec-f225-4309-ac1b-aa5a9237ae6f)
+- Kubernetes 작업자 노드에서 실행되는 에이전트
+  - **클러스터 등록**: 작업자 노드를 Kubernetes 클러스터에 등록함
+  - **컨테이너 관리**: 마스터 노드의 스케줄러 지시에 따라 노드에 컨테이너(Pod)를 배포하거나 제거함
+  - **상태 보고**: 정기적으로 노드와 컨테이너의 상태를 모니터링하고 kube API 서버에 보고함
+
+#### kubelet 설치
+```Shell
+wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kubelet
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/d90de9e7-01e9-405f-9a32-3ef7d0007f3b)
+  - kubeadm 지원 X. kubelet은 항상 수동으로 설치해야 함
+  - kubelet을 서비스로 실행함 실행 중인 kubelet 프로세스를 확인할 수 있습니다.
+
+#### kubelet 구성
+```Shell
+ps -aux | grep kubelet
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/8353ec58-f995-476c-855d-06e5abc14e0c)
+- 프로세스를 작업자 노드에 나열하고 kubelet을 검색하여 실행중인 프로세스와 효과적인 옵션 확인
+  - **설정 파일 편집**: kubelet의 설정 파일을 편집하여 필요한 구성을 적용함
+  - **인증서 생성**: kubelet이 클러스터 내에서 인증되도록 인증서를 생성함
+  - **TLS Bootstrap**: kubelet을 TLS Bootstrap으로 설정하여 보안 통신을 설정함
+
+---
+
+
