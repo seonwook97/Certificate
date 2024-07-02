@@ -168,4 +168,41 @@ kubectl get daemonset -n kube-system
   ```
   ![image](https://github.com/seonwook97/Certificate/assets/92377162/d038557f-dc97-4e3a-bda3-e41d8f169968)
   
+### Pods with YAML
 
+#### Pod 정의 파일 구성
+```yaml
+apiVersion: v1 -- String
+kind: Pod -- String
+metadata: -- Dictionary  
+  name: my-app-pod # 객체의 이름 지정
+  labels: # 객체를 식별하는 key-value, 여러 레이블을 추가하여 객체를 필터링하고 그룹화 할 수 있음
+    app: my-app
+spec:
+  containers: -- List/Array # 여러 개의 컨테이너를 포함할 수 있음 
+    - name: my-app-container
+      image: nginx
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/41bfdc50-9904-492f-a454-b7b84fc2e826)
+- apiVersion(API 버전): API 버전은 Kubernetes API의 버전을 나타냄(ex. `v1`)
+- kind(종류): 생성하려는 객체의 유형(`pod`, `replica set`, `deployment`, `service`) 
+- metadata(메타데이터): 객체에 대한 정보를 담고 있으며, 이름과 레이블을 포함. 딕셔너리 형태
+- spec(사양): 객체의 구성, Pod의 경우 컨테이너 정보를 포함
+
+#### 파일 생성 및 Pod 생성
+```Shell
+kubectl create -f pod-definition.yaml
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/50f10f69-4461-4ddf-a054-0de9066c46d1)
+
+#### Pod 확인
+```Shell
+kubectl get pods
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/efac840c-940e-4a59-882c-f18c40b62398)
+
+#### Pod 상세 정보
+```Shell
+kubectl describe pod my-app-pod
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/9211b554-d014-4438-9e59-239a194b75de)
