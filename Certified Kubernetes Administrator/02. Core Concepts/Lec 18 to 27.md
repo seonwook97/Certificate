@@ -159,13 +159,13 @@ kubectl get daemonset -n kube-system
 - Pod를 배포하기 위해 `kubectl run` 명령을 사용할 수 있음
   - 이 명령은 Docker 컨테이너를 배포하기 위해 자동으로 Pod를 생성함
 - NGINX Docker 이미지를 배포
-  ```sh
+  ```shell
   kubectl run nginx --image=nginx
   ```
 - Pod 목록 확인 
-  ![image](https://github.com/seonwook97/Certificate/assets/92377162/d038557f-dc97-4e3a-bda3-e41d8f169968)
-  ```SH
-    kubectl get pods
+  ```shell
+  kubectl get pods
   ```
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/d038557f-dc97-4e3a-bda3-e41d8f169968)
   
 
