@@ -111,3 +111,61 @@ kubectl get daemonset -n kube-system
 ```
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/155fe4ad-0c7e-4175-988b-972ccd59dc0f)
 - 사실은 DaemonSet으로 배포되며, 클러스터의 각 노드에 항상 하나의 Pod가 배포됨
+
+---
+
+### Recap - Pods
+
+#### Pod 이해하기
+
+- 설정사항 가정:
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/31fcfe63-7a8b-4b16-b11e-883465dd1537)
+  - 애플리케이션이 개발되어 Docker 이미지로 만들어졌으며, Docker Hub와 같은 Docker 저장소에 업로드되어 있음
+  - Kubernetes 클러스터가 이미 설정되어 작동 중. 이는 단일 노드 설정일 수도 있고 다중 노드 설정일 수도 있음
+
+![image](https://github.com/seonwook97/Certificate/assets/92377162/2a0cedfd-29da-47f4-a364-94f22e608206)
+- Kubernetes의 궁극적인 목표는 애플리케이션을 컨테이너 형태로 클러스터의 작업자 노드에 배포하는 것
+- 하지만 Kubernetes는 컨테이너를 직접 배포하지 않고, 컨테이너를 Kubernetes 객체인 Pod에 캡슐화하여 배포함
+- Pod는 애플리케이션의 단일 인스턴스를 나타내며, Kubernetes에서 만들 수 있는 가장 작은 단위
+
+#### Pod의 동작 방식
+
+**단일 컨테이너 Pod**
+- 가장 간단한 경우는 단일 노드 Kubernetes 클러스터에서 단일 Docker 컨테이너로 애플리케이션을 실행하는 것
+- Pod는 이 단일 컨테이너를 캡슐화함
+
+**여러 인스턴스 확장**
+![image](https://github.com/seonwook97/Certificate/assets/92377162/305fb0b0-f5ef-46aa-be95-56017763ee8a)
+- 사용자가 증가하면 애플리케이션을 확장해야 함
+- 이를 위해 새로운 Pod를 생성하여 애플리케이션의 추가 인스턴스를 배포함
+- 기존 Pod에 추가 컨테이너를 추가하는 것이 아니라, 새로운 Pod를 생성하여 확장
+
+**다중 컨테이너 Pod**
+![image](https://github.com/seonwook97/Certificate/assets/92377162/49b52a73-0134-4953-8db5-b5cac948649d)
+- 하나의 Pod에 여러 컨테이너를 포함할 수도 있음
+- 이는 주로 도우미 컨테이너와 같은 보조 작업을 수행하는 경우에 사용됨
+  - 예를 들어, 데이터 처리를 위한 도우미 컨테이너와 함께 웹 애플리케이션을 실행할 수 있음
+  - 이 경우, 두 컨테이너는 동일한 Pod 내에서 생성되고 함께 소멸되며, 동일한 네트워크 및 저장소 공간을 공유할 수 있음
+
+#### Docker와 비교
+![image](https://github.com/seonwook97/Certificate/assets/92377162/733dbf6e-0886-4f68-8231-083d9c687e73)
+- Docker 환경에서 여러 컨테이너를 관리하는 것은 복잡함
+- 네트워크 연결, 볼륨 공유 및 상태 모니터링 등을 수동으로 관리해야 함
+- 그러나 Kubernetes는 Pod를 사용하여 이러한 작업을 자동으로 처리함
+- Pod는 컨테이너 간의 네트워크와 저장소 공유를 자동으로 설정하며, 상태 모니터링과 관리도 자동화함
+
+#### Pod 배포
+
+- Pod를 배포하기 위해 `kubectl run` 명령을 사용할 수 있음
+  - 이 명령은 Docker 컨테이너를 배포하기 위해 자동으로 Pod를 생성함
+- NGINX Docker 이미지를 배포
+  ```sh
+  kubectl run nginx --image=nginx
+  ```
+- Pod 목록 확인 
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/d038557f-dc97-4e3a-bda3-e41d8f169968)
+  ```SH
+    kubectl get pods
+  ```
+  
+
