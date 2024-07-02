@@ -119,11 +119,11 @@ kubectl get daemonset -n kube-system
 #### Pod 이해하기
 
 - 설정사항 가정:
-  ![image](https://github.com/seonwook97/Certificate/assets/92377162/31fcfe63-7a8b-4b16-b11e-883465dd1537)
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/69d57d62-91fc-432b-9554-b682931f520e)
   - 애플리케이션이 개발되어 Docker 이미지로 만들어졌으며, Docker Hub와 같은 Docker 저장소에 업로드되어 있음
   - Kubernetes 클러스터가 이미 설정되어 작동 중. 이는 단일 노드 설정일 수도 있고 다중 노드 설정일 수도 있음
 
-![image](https://github.com/seonwook97/Certificate/assets/92377162/2a0cedfd-29da-47f4-a364-94f22e608206)
+![image](https://github.com/seonwook97/Certificate/assets/92377162/558c5915-56bf-4410-a8f7-ac8e95150c01)
 - Kubernetes의 궁극적인 목표는 애플리케이션을 컨테이너 형태로 클러스터의 작업자 노드에 배포하는 것
 - 하지만 Kubernetes는 컨테이너를 직접 배포하지 않고, 컨테이너를 Kubernetes 객체인 Pod에 캡슐화하여 배포함
 - Pod는 애플리케이션의 단일 인스턴스를 나타내며, Kubernetes에서 만들 수 있는 가장 작은 단위
@@ -135,20 +135,20 @@ kubectl get daemonset -n kube-system
 - Pod는 이 단일 컨테이너를 캡슐화함
 
 **여러 인스턴스 확장**
-![image](https://github.com/seonwook97/Certificate/assets/92377162/305fb0b0-f5ef-46aa-be95-56017763ee8a)
+![image](https://github.com/seonwook97/Certificate/assets/92377162/06e6b8ce-8c27-4b01-8823-93a3813d4551)
 - 사용자가 증가하면 애플리케이션을 확장해야 함
 - 이를 위해 새로운 Pod를 생성하여 애플리케이션의 추가 인스턴스를 배포함
 - 기존 Pod에 추가 컨테이너를 추가하는 것이 아니라, 새로운 Pod를 생성하여 확장
 
 **다중 컨테이너 Pod**
-![image](https://github.com/seonwook97/Certificate/assets/92377162/49b52a73-0134-4953-8db5-b5cac948649d)
+![image](https://github.com/seonwook97/Certificate/assets/92377162/9c6fa49c-9636-4e16-9a8e-68f1ed476d51)
 - 하나의 Pod에 여러 컨테이너를 포함할 수도 있음
 - 이는 주로 도우미 컨테이너와 같은 보조 작업을 수행하는 경우에 사용됨
   - 예를 들어, 데이터 처리를 위한 도우미 컨테이너와 함께 웹 애플리케이션을 실행할 수 있음
   - 이 경우, 두 컨테이너는 동일한 Pod 내에서 생성되고 함께 소멸되며, 동일한 네트워크 및 저장소 공간을 공유할 수 있음
 
 #### Docker와 비교
-![image](https://github.com/seonwook97/Certificate/assets/92377162/733dbf6e-0886-4f68-8231-083d9c687e73)
+![image](https://github.com/seonwook97/Certificate/assets/92377162/1e07b840-073f-4586-beeb-f27c127b0f4d)
 - Docker 환경에서 여러 컨테이너를 관리하는 것은 복잡함
 - 네트워크 연결, 볼륨 공유 및 상태 모니터링 등을 수동으로 관리해야 함
 - 그러나 Kubernetes는 Pod를 사용하여 이러한 작업을 자동으로 처리함
