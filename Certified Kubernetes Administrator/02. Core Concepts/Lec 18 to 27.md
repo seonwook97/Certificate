@@ -170,7 +170,7 @@ kubectl get daemonset -n kube-system
   
 ### Pods with YAML
 
-#### Pod 정의 파일 구성
+#### Pod YAML 구성
 ```yaml
 apiVersion: v1 -- String
 kind: Pod -- String
