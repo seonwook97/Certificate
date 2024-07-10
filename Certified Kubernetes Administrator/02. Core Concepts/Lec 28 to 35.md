@@ -200,9 +200,10 @@ kubectl get pods
 
 #### Deployment의 위치
 <img width="573" alt="image" src="https://github.com/seonwook97/Certificate/assets/92377162/70718bfa-2ad6-4a93-83c6-5215ac531875">
-- Pod: 단일 애플리케이션 인스턴스
-- ReplicaSet: 여러 Pod 관리
-- Deployment: ReplicaSet을 관리하며 추가 기능 제공
+
+- **Pod**: 단일 애플리케이션 인스턴스
+- **ReplicaSet**: 여러 Pod 관리
+- **Deployment**: ReplicaSet을 관리하며 추가 기능 제공
 
 #### Deployment 생성
 **YAML 파일 정의**
@@ -228,6 +229,7 @@ spec:
       containers:
       - name: nginx-container
         image: nginx
+```
 
 **Deployment 정의 파일 생성**
 ```sh
