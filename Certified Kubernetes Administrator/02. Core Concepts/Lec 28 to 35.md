@@ -184,3 +184,77 @@ kubectl get pods
   ```sh
   kubectl replace -f rs-definition.yaml
   ```
+
+---
+
+### Deployments
+
+#### Deployment 개요
+- 프로덕션 환경에서 애플리케이션 배포를 관리하는 고수준 Kubernetes 객체
+- 주요 기능:
+  - 다수의 애플리케이션 인스턴스 실행
+  - 롤링 업데이트를 통한 무중단 업그레이드
+    - `롤링 업데이트`: 영향도에 따른 순차적 인스턴스 업그레이드
+  - 롤백 기능
+  - 환경 변경 일시 중지 및 재개
+
+#### Deployment의 위치
+<img width="573" alt="image" src="https://github.com/seonwook97/Certificate/assets/92377162/70718bfa-2ad6-4a93-83c6-5215ac531875">
+- Pod: 단일 애플리케이션 인스턴스
+- ReplicaSet: 여러 Pod 관리
+- Deployment: ReplicaSet을 관리하며 추가 기능 제공
+
+#### Deployment 생성
+**YAML 파일 정의**
+```yaml
+apiVersion: apps/v1
+kind: Deployment # 배포
+metadata:
+  name: my-app-deployment
+  labels:
+    app: my-app
+    type: front-end
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
+  template:
+    metadata:
+      labels:
+        app: my-app
+        type: front-end
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx
+
+**Deployment 정의 파일 생성**
+```sh
+kubectl create –f deployment-definition.yml
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/75c9e867-f868-4b1a-8b9b-8bacc38ed869)
+
+**Deployments 실행**: ReplicaSet을 자동으로 생성
+```sh
+kubectl get deployments
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/bb9f1c56-b51c-47db-b8ba-8323594effad)
+
+**ReplicaSet 실행**: Pods를 자동으로 생성
+```sh
+kubectl get replicaset
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/bce02f8c-69c2-42fc-a30a-616dcdf0b283)
+
+**Pods 가져오기**: 배포와 복제세트 이름이 적힌 파드를 볼 수 있음
+```sh
+kubectl get pods
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/ec48a8ed-708d-41b4-aacb-d55522b4d03d)
+
+**생성된 객체 한번에 보기**
+```sh
+kubectl get all
+```
+![image](https://github.com/seonwook97/Certificate/assets/92377162/12768391-fd30-4973-90bd-33d6fa865ce2)
