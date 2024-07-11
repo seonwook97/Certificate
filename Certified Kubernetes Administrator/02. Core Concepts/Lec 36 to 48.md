@@ -14,15 +14,15 @@
 
 #### Service 유형
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/d08a77ea-8853-4b30-8ca0-4f96a8d6a5c0)
-1. NodePort: 노드의 포트를 통해 Pod에 접근 가능하게 함
-2. ClusterIP: 클러스터 내부 통신을 위한 가상 IP 생성
-3. LoadBalancer: 클라우드 제공자의 로드 밸런서 프로비저닝
+- **NodePort**: 노드의 포트를 통해 Pod에 접근 가능하게 함
+- **ClusterIP**: 클러스터 내부 통신을 위한 가상 IP 생성
+- **LoadBalancer**: 클라우드 제공자의 로드 밸런서 프로비저닝
 
 #### NodePort Service 상세
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/f8c3574c-3cb7-4805-889a-911f9daab7e7)
-1. targetPort: Pod의 실제 애플리케이션 포트 (예: 80)
-2. port: 서비스 자체의 포트
-3. nodePort: 노드의 외부 접근 포트 (기본 범위: 30000-32767)
+- **targetPort**: Pod의 실제 애플리케이션 포트 (예: 80)
+- **port**: 서비스 자체의 포트
+- **nodePort**: 노드의 외부 접근 포트 (기본 범위: 30000-32767)
 
 #### NodePort Service YAML 파일 정의
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/3dc2133c-da8a-4646-a938-531a1372e677)
