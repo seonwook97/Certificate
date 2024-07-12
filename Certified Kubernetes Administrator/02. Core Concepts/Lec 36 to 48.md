@@ -40,6 +40,7 @@ spec: # Service 정의
     selector: # Pod YAML에서 labels를 참조
        app: myapp
        type: front-end
+```
 
 **Service 정의 파일 생성**
 ```sh
