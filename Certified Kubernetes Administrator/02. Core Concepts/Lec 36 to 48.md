@@ -143,8 +143,6 @@ kubectl get services
 <img width="726" alt="image" src="https://github.com/user-attachments/assets/3830bffd-1812-44ba-89f0-b6096fa9d523">
 - 여러 노드와 포트 조합 대신 단일 URL 제공 (예: votingapp.com)
 - 수동으로 외부 로드 밸런서를 설정하고 관리하는 번거로움 해소
-
-#### LoadBalancer Service 사용
 - 지원되는 클라우드 플랫폼에서만 완전히 작동 (GCP, AWS, Azure 등)
 - 서비스 타입을 'LoadBalancer'로 설정하여 사용
 
