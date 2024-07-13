@@ -72,3 +72,57 @@ curl http://192.168.1.2:30008
 - 서비스의 유연성
   - Pod의 추가/제거 시 서비스가 자동으로 업데이트됨
   - 생성 후 추가 구성 변경이 거의 필요 없음
+
+--- 
+
+### Services Cluster IP
+
+#### ClusterIP Service 개요
+![image](https://github.com/user-attachments/assets/0a8cabf5-4679-41b6-a97e-3d51656adc87)
+- 풀 스택 웹 애플리케이션의 다양한 구성 요소 간 내부 통신을 위한 서비스
+  - 예: 프런트엔드 웹 서버, 백엔드 서버, Redis, MySQL 등
+- Pod IP의 동적 특성으로 인한 통신 문제 해결
+
+#### ClusterIP 서비스의 역할
+- Pod를 그룹화하고 단일 인터페이스 제공
+- 서비스 내 Pod 간 로드 밸런싱 (무작위 알고리즘)
+- 마이크로서비스 기반 애플리케이션(MSA)의 효과적인 배포 지원
+- 각 서비스에 고유한 IP와 이름 할당
+
+#### ClusterIP Service YAML 파일 정의
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: backend
+spec:
+    type: ClusterIP  # 자동으로 추정
+    ports:
+     - targetPort: 80
+       port: 80
+    selector:
+       app: myapp
+       type: backend
+```
+
+**Service 정의 파일 생성**
+```sh
+kubectl create –f service-definition.yml
+```
+![image](https://github.com/user-attachments/assets/4f3d06e2-4e91-4291-8d80-dccacbbef623)
+
+**Service 보기**
+```sh
+kubectl get services
+```
+![image](https://github.com/user-attachments/assets/08dbf300-d3af-464e-af7b-0e635e97a2b4)
+
+**ClusterIP 서비스 특징**
+- 클러스터 내부에서만 접근 가능
+- 다른 Pod에서 서비스 이름 또는 ClusterIP로 접근
+- 기본 서비스 유형 (type을 지정하지 않으면 ClusterIP로 생성)
+
+**ClusterIP 서비스의 이점**
+- 동적 Pod IP 변경에 관계없이 안정적인 통신 제공
+- 서비스 레이어 간 독립적인 확장 및 이동 가능
+- 마이크로서비스 아키텍처(MSA) 지원
