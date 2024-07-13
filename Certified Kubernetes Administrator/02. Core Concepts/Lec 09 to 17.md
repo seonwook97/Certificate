@@ -275,14 +275,14 @@ curl -X POST /api/v1/namesapces/default/pods ...[other]
   - 노드가 연결되지 않은 상태로 5분이 지나면 해당 노드에 할당된 POD를 제거하고, POD가 복제본 세트의 일부인 경우 다른 건강한 노드에 POD를 재프로비저닝함
 
 - **복제 컨트롤러 (Replication Controller)**
-  ![image](https://github.com/seonwook97/Certificate/assets/92377162/6cf93d4d-e39e-4347-b894-47d3378a64ed)
 
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/6cf93d4d-e39e-4347-b894-47d3378a64ed)
   - 복제 세트 내에서 항상 원하는 수의 POD가 실행 중인지 확인함
   - POD가 종료되면 새로운 POD를 생성함
 
 - **기타 컨트롤러**
-  ![image](https://github.com/seonwook97/Certificate/assets/92377162/bd921ea4-8d8f-4e7b-b0d4-e2bf0d62e412)
 
+  ![image](https://github.com/seonwook97/Certificate/assets/92377162/bd921ea4-8d8f-4e7b-b0d4-e2bf0d62e412)
   - 다양한 Kubernetes 리소스를 관리하는 많은 다른 컨트롤러가 있음
     - Deployment(배포), Service-Account(서비스), Namespace(네임스페이스), Persistent Volume(영구 볼륨) 등
   - 각 컨트롤러는 시스템의 특정 부분을 담당하며, 클러스터의 상태를 원하는 상태로 유지하기 위해 협력함
@@ -298,8 +298,8 @@ curl -X POST /api/v1/namesapces/default/pods ...[other]
 
     - Kubernetes 릴리스 페이지에서 Kube Controller Manager 바이너리를 다운로드함
   - **추출 및 실행**
+
     ![image](https://github.com/seonwook97/Certificate/assets/92377162/00f718f5-f2a3-49e1-854b-15b11c8eeb29)
-    
     - 바이너리를 추출하고 서비스로 실행함
       - 컨트롤러 중 일부가 작동하지 않거나 존재하지 않음
 
