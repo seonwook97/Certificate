@@ -126,3 +126,41 @@ kubectl get services
 - 동적 Pod IP 변경에 관계없이 안정적인 통신 제공
 - 서비스 레이어 간 독립적인 확장 및 이동 가능
 - 마이크로서비스 아키텍처(MSA) 지원
+
+---
+
+### Services - LoadBalancer
+
+#### LoadBalancer Service 개요
+- 외부 사용자가 애플리케이션에 접근할 수 있게 하는 서비스 타입
+- 클라우드 제공업체의 로드 밸런서와 통합되어 작동
+
+#### NodePort vs LoadBalancer
+- NodePort: 워커 노드의 특정 포트를 통해 애플리케이션 노출
+- LoadBalancer: 클라우드 제공업체의 로드 밸런서를 통해 단일 엔드포인트 제공
+
+#### LoadBalancer Service의 필요성
+<img width="726" alt="image" src="https://github.com/user-attachments/assets/3830bffd-1812-44ba-89f0-b6096fa9d523">
+- 여러 노드와 포트 조합 대신 단일 URL 제공 (예: votingapp.com)
+- 수동으로 외부 로드 밸런서를 설정하고 관리하는 번거로움 해소
+
+#### LoadBalancer Service 사용
+- 지원되는 클라우드 플랫폼에서만 완전히 작동 (GCP, AWS, Azure 등)
+- 서비스 타입을 'LoadBalancer'로 설정하여 사용
+
+#### LoadBalancer Service YAML 파일 정의
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: frontend-loadbalancer
+spec:
+    type: LoadBalancer
+    ports:
+     - targetPort: 80
+       port: 80
+       nodePort: 30008       
+    selector:
+       app: myapp
+       type: frontend-loadbalancer
+```
