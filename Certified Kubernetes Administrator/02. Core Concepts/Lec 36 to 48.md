@@ -163,3 +163,77 @@ spec:
        app: myapp
        type: frontend-loadbalancer
 ```
+
+---
+
+### Namespaces
+
+#### Namespaces 개요
+- 쿠버네티스 클러스터 내 가상 클러스터
+- 리소스 격리 및 조직화에 사용
+- 다중 사용자 환경에서 리소스 충돌 방지
+
+#### 기본 Namespaces
+![image](https://github.com/user-attachments/assets/d72f3c48-e5b8-4596-975f-b302bc09a3f1)
+
+- **default**: 기본적으로 생성되는 객체가 위치
+- **kube-system**: 쿠버네티스 시스템 컴포넌트와 서비스가 위치
+- **kube-public**: 모든 사용자가 접근 가능한 공개 리소스 위치
+
+#### Namespaces 사용 이점
+- 개발/운영 환경 분리
+  ![image](https://github.com/user-attachments/assets/8c764a37-329c-4438-a7b5-f434cacee063)
+
+- 리소스 정책 및 할당량 관리
+  <img width="657" alt="image" src="https://github.com/user-attachments/assets/78bb8114-2d4f-4ecf-9243-dea5e1b062cd">
+
+- 팀 또는 프로젝트별 리소스 분리
+  ![image](https://github.com/user-attachments/assets/533d0d29-0082-4dac-8b28-182bda26d223)
+
+#### Namespaces 간 통신
+- 같은 네임스페이스 내: 서비스 이름으로 통신
+- 다른 네임스페이스: `<servicename>.<namespace>.svc.cluster.local` 형식 사용
+  <img width="631" alt="image" src="https://github.com/user-attachments/assets/d6af34c6-d2e6-48b4-ad60-f18ccd104951">
+  ![image](https://github.com/user-attachments/assets/43b00f8e-6152-44f7-a6d4-eb7cf29e0925)
+
+
+#### Namespaces 관련 명령어
+```sh
+# 기본 네임스페이스 파드 나열
+kubectl get pods
+
+# 특정 네임스페이스의 파드 나열
+kubectl get pods --namespace=kube-system
+```
+![image](https://github.com/user-attachments/assets/f7554f61-7508-4619-9223-295fa876b316)
+
+#### Namespaces YAML 파일 정의
+```sh
+# 기본 네임스페이스에 파드 생성
+kubectl create -f pod-definition.yml
+
+# 특정 네임스페이스에 파드 생성
+kubectl create -f pod-definition.yml --namesapce=dev
+```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  namespace: dev # 특정 네임스페이스에 생성할 때
+  labels:
+     app: myapp
+     type: front-end
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+```
+<img width="326" alt="image" src="https://github.com/user-attachments/assets/18d655b0-7839-440a-982b-34593b05c2ff">
+
+# 현재 컨텍스트의 네임스페이스 변경
+kubectl config set-context --current --namespace=dev
+
+# 모든 네임스페이스의 파드 조회
+kubectl get pods --all-namespaces
