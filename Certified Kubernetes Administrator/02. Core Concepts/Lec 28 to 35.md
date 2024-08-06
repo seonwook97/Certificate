@@ -260,3 +260,36 @@ kubectl get pods
 kubectl get all
 ```
 ![image](https://github.com/seonwook97/Certificate/assets/92377162/12768391-fd30-4973-90bd-33d6fa865ce2)
+
+---
+
+### Certification Tips
+- 시험 중에는 브라우저에서 터미널로 YAML 파일을 복사하고 붙여넣기 하는 것이 어려움
+- kubectl run 명령을 사용하면 YAML 템플릿을 생성하는 데 수월
+- 때로는 YAML 파일을 전혀 만들지 않고도 kubectl run 명령만으로 충분함
+  - 특정 이름과 이미지로 pod나 deployment를 생성하라는 요청을 받았다면 kubectl run 명령을 실행할 수 있음
+```sh
+# NGINX Pod 생성
+kubectl run nginx --image=nginx
+
+# POD Manifest YAML 파일 생성 (-o yaml). 생성하지 않음(--dry-run)
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+
+# Deployment 생성
+kubectl create deployment --image=nginx nginx
+
+# Deployment YAML 파일 생성 (-o yaml). 생성하지 않음(--dry-run)
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+# Deployment YAML 파일 생성 (-o yaml). 생성하지 않음(--dry-run)하고 파일로 저장
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml > nginx-deployment.yaml
+
+# 파일에 필요한 변경을 하고(예: 더 많은 replica 추가) deployment를 생성
+kubectl create -f nginx-deployment.yaml
+
+# k8s 버전 1.19+ 에서는 --replicas 옵션을 사용하여 4개의 replica로 deployment를 생성할 수 있음
+kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
+```
+
+#### Reference
+- https://kubernetes.io/docs/reference/kubectl/conventions/

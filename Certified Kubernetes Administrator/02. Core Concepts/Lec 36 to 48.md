@@ -277,3 +277,130 @@ spec:
 kubectl create -f compute-quota.yaml
 ```
 
+---
+
+### Imperative vs Declarative
+
+#### Infrastructure as Code
+![image](https://github.com/user-attachments/assets/7449028d-b02a-4a60-8c08-ded88923cfdd)
+
+- **Imperative**: 목적지에 도달하기 위해 무엇을, 어떻게 할건지 명시해야 함
+  - 'web-server'라는 이름의 VM을 프로비저닝
+  - 해당 VM에 NGINX 소프트웨어를 설치
+  - 설정 파일을 편집하여 포트 '8080'을 사용하도록 함
+  - 설정 파일을 편집하여 웹 경로를 '/var/www/nginx'로 설정
+  - GIT 저장소 X에서 '/var/www/nginx'로 웹 페이지를 로드
+  - NGINX 서버를 시작
+
+- **Declarative**: 최종 목적지 지정 후(무엇을 할건지) 시스템이 올바른 경로를 통해 도달. 단계별 지침을 제공하지 않음(어떻게 할건지)
+  - VM Name: web-server
+  - Package: nginx
+  - Port: 8080
+  - Path: /var/www/nginx
+  - Code: GIT Repo - X
+
+#### Kubernetes
+- **Imperative Commands**
+  - 장점: 빠른 생성 및 수정, YAML 파일 불필요
+  - 단점: 기능 제한, 복잡한 사용 사례에 부적합, 추적 어려움
+  - Create Objects
+    ```sh
+    kubectl run --image=nginx nginx
+    kubectl create deployment --image=nginx nginx
+    kubectl expose deployment nginx --port 80
+    ```
+  - Update Objects
+    ```sh
+    kubectl edit deployment nginx
+    kubectl scale deployment nginx --replicas=5
+    kubectl set image deployment nginx nginx=nginx:1.18
+    ```
+
+- **Imperative Object Configuration Files**
+  - 장점: YAML 파일로 구성 관리, 버전 관리 가능
+  - 단점: 현재 상태 확인 필요, 오류 발생 가능
+  - Create Objects
+    ```sh
+    kubectl create –f nginx.yaml
+    ```
+  - Update Objects
+    ```sh
+    kubectl replace –f nginx.yaml
+    kubectl delete –f nginx.yaml
+    ```
+
+- **Declarative**
+  - 장점:
+    - 현재 상태를 자동으로 확인하고 필요한 변경사항만 적용
+    - 여러 오브젝트 동시 관리 가능
+    - 일관된 명령으로 생성, 수정, 삭제 가능
+  - 단점: 복잡한 변경사항 추적이 어려울 수 있음
+  - Create Objects
+    ```sh
+    kubectl apply –f nginx.yaml
+    kubectl apply –f /path/to/config-files
+    ```
+  - Update Objects
+    ```sh
+    kubectl apply –f nginx.yaml
+    ```
+
+#### Exam Tips
+- 실제 환경: 선언형 접근 방식 사용 (kubectl apply)
+- 시험 환경: 상황에 따라 명령형과 선언형 접근 방식 혼용
+- Kubernetes 공식 문서 참조하여 다양한 접근 방식 숙지
+  - https://kubernetes.io/docs/tasks/manage-kubernetes-objects/
+
+---
+
+### Certification Tips - Imperative Commands with Kubectl
+
+#### 유용한 옵션
+- `--dry-run=client`: 실제로 리소스를 생성하지 않고 명령의 유효성 검사
+- `-o yaml`: 리소스 정의를 YAML 형식으로 출력
+
+#### POD 관련 명령
+```sh
+# NGINX Pod 생성
+kubectl run nginx --image=nginx
+
+# Pod YAML 파일 생성 (생성하지 않음)
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+```
+
+#### Deployment 관련 명령
+```sh
+# Deployment 생성
+kubectl create deployment --image=nginx nginx
+
+# Deployment YAML 파일 생성 (생성하지 않음)
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+# 4개의 Replica로 Deployment 생성
+kubectl create deployment nginx --image=nginx --replicas=4
+
+# 스케일 조정을 통한 Deployment 확장
+kubectl scale deployment nginx --replicas=4
+
+# YAML 파일로 저장 후 수정
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml
+```
+
+#### Service 관련 명령
+```sh
+# redis pod를 포트 6379에 노출하는 ClusterIP 타입의 redis-service라는 이름의 Service 생성
+# (1) 자동으로 pod의 label을 selector로 사용
+kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml 
+# (2) pod의 label을 selector로 사용하지 않고, 대신 selector를 app=redis로 가정 - selector 수정 필요
+kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml 
+
+# 노드의 포트 30080에서 nginx pod의 포트 80을 노출하는 NodePort 타입의 nginx라는 이름의 Service 생성
+# (1) node port를 지정할 수 없어, YAML 생성 후 service 생성 전 수동으로 node port 추가 필요
+kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml
+# (2) pod의 label을 selector로 사용하지 않음
+kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
+```
+
+#### Reference
+- https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+- https://kubernetes.io/docs/reference/kubectl/conventions/
