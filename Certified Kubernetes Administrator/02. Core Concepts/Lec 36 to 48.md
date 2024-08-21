@@ -404,3 +404,50 @@ kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=cl
 #### Reference
 - https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
 - https://kubernetes.io/docs/reference/kubectl/conventions/
+
+---
+
+### Kubectl Apply Command
+
+#### kubectl apply 명령의 세 가지 요소
+- local file
+- last applied configuration(마지막으로 적용된 구성)
+- kubernetes live object configuration(라이브 객체 정의)
+
+#### 객체 생성 과정
+- 객체가 존재하지 않으면 생성됨
+- Kubernetes 내에 객체 구성이 생성됨
+  - 로컬에서 생성한 것과 유사하지만 객체 상태를 저장하는 추가 필드가 있음
+  - Kubernetes 클러스터의 라이브 구성
+
+#### kubectl apply 명령의 추가 동작
+- local file의 YAML 버전을 JSON 형식으로 변환함
+- last applied configuration으로 저장
+
+#### 객체 업데이트 과정
+- 세 가지 구성(로컬, 라이브, 마지막 적용)을 비교
+- 라이브 객체에 필요한 변경 사항을 식별함
+  - 예: local file에서 nginx 이미지가 1.19로 업데이트된 경우
+    - 이 값을 live object configuration의 값과 비교
+    - 차이가 있으면 live object configuration을 새 값으로 업데이트
+- 변경 후, last applied configuration을 항상 최신 상태로 업데이트
+
+#### 필드 삭제 처리
+- local file에서 필드가 삭제된 경우
+  - last applied configuration에는 있지만 local file에는 없는 경우
+  - 해당 필드를 live object configuration에서 제거해야 함을 의미
+- live object configuration에만 있고 local file이나 last applied configuration에 없는 필드는 그대로 둠
+- local file에서 누락되고 last applied configuration에 있는 필드
+  - 이전 단계에서 존재했지만 현재 제거되고 있음을 의미
+  - 이 필드는 live object configuration에서 제거됨
+
+#### last applied configuration의 저장 위치
+- Kubernetes 클러스터의 live object configuration에 주석으로 저장됨
+- 주석 이름: "last-applied-configuration"
+
+#### 주의사항
+- apply 명령을 사용할 때만 last applied configuration이 저장됨
+- kubectl create 또는 replace 명령은 이 구성을 저장하지 않음
+- 명령형과 선언형 접근 방식을 혼합하여 사용하지 않도록 주의
+- **apply 명령은 변경 사항이 있을 때마다 세 가지 구성을 모두 비교**
+- **이를 통해 live object configuration에 필요한 변경 사항을 결정**
