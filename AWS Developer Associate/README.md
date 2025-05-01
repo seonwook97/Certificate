@@ -1,5 +1,3 @@
-![](https://velog.velcdn.com/images/seonwook97/post/c62ff2f4-6970-426c-b3e0-3a6adad0a9d5/image.png)
-
 ## 취득 배경
 작년 6월 AWS Certified Data Engineer Associate 취득 이후 실제 AWS 서비스의 운영 시 개발자가 다뤄야 할 중점적인 내용들에 대해서 알아봄과 함께 현재 AWS에서 [Associate 챌린지](https://pages.awscloud.com/GLOBAL-other-GC-Traincert-Foundational-and-Associate-Certification-Challenge-2025-reg.html)를 진행하고 있어 50% 할인된 응시료로 시험을 볼 수 있어 취득하게 되었습니다. 
 ![](https://velog.velcdn.com/images/seonwook97/post/a6b42023-ffe5-4247-9311-1289ff495afd/image.png)
