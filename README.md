@@ -4,6 +4,7 @@
 
 | 자격명 | 참고자료 | 시작일자 | 종료일자 |
 | --- | --- | --- | --- |
+| AWS Certified DevOps Engineer Professional | [AWS Certified DevOps Engineer Professional DOP-C02 시험 합격! 2025](udemy.com/course/aws-certified-devops-engineer-professional-korean/?kw=devops&src=sac) | 2025-07-01 | 2025-08-01 |
 | AWS Certified Developer Associate | [AWS Certified Developer Associate DVA-C02 시험 합격! 2025](https://www.udemy.com/course/best-aws-certified-developer-associate/?kw=aws+certified&src=sac&couponCode=KRLETSLEARNNOW) | 2025-04-10 | 2025-05-01 |
 | AWS Certified Data Engineer Associate | [AWS Certified Data Engineer Associate - 실습](https://www.udemy.com/course/aws-data-engineer) | 2024-05-20 | 2024-06-08 |
 | AWS Certified Machine Learning Specialty | [AWS Certified Machine Learning Specialty - 실습](https://www.udemy.com/course/aws-machine-learning) | 2024-04-22 | 2024-05-15 |
