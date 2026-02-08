@@ -60,6 +60,7 @@ Google Cloud Partner Skills 실습을 하면서 프로젝트 내에서 자주 �
 
 
 ## 합격 후기
+![alt text](image.png)
 Exam Guide에서 실제로 시험에 출제되는 Case Study에 대한 내용을 미리 볼 수 있어 선지의 기술적 구성 요소들에 대해 시간적으로 충분히 고민할 수 있었습니다. 
 
 문제 상황에 따른 최적의 GCP 서비스 구성 사례에 대해서는 Examtopics 내의 문제들을 통해 충분히 대비하였습니다. 
